@@ -23,4 +23,8 @@ public class Deck {
     public Card takeCardFromBottom() {
         return this.cards.poll();
     }
+
+    public void shuffle() {
+        // Method to shuffle the deck
+    }
 }
