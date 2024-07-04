@@ -11,4 +11,16 @@ public class Deck {
         this.cards = new LinkedList<>();
         Collections.addAll(this.cards, content);
     }
+
+    public Card[] getCards() {
+        return cards.toArray(new Card[] {});
+    }
+
+    public void addCardOnTop(Card card) {
+        this.cards.add(card);
+    }
+
+    public Card takeCardFromBottom() {
+        return this.cards.poll();
+    }
 }
