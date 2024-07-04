@@ -1,4 +1,4 @@
-package game.presentation;
+package game.presentation.frames;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
