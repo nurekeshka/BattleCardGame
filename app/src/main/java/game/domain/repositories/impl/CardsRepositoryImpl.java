@@ -11,9 +11,14 @@ import java.util.List;
 
 public class CardsRepositoryImpl implements CardsRepository {
 
+    private static final String IMAGE_PATH_TEMPLATE = "path/to/images/%s_%s.png";
+
     @Override
     public Card getCard(CardSuit suit, CardValue value) {
-        return new Card(suit, value);
+        Card card = new Card(suit, value);
+        String imagePath = getImagePath(card);
+        System.out.println("Image path for card: " + imagePath);
+        return card;
     }
 
     @Override
@@ -22,10 +27,17 @@ public class CardsRepositoryImpl implements CardsRepository {
 
         for (CardSuit suit : CardSuit.values()) {
             for (CardValue value : CardValue.values()) {
-                cards.add(new Card(suit, value));
+                Card card = new Card(suit, value);
+                String imagePath = getImagePath(card);
+                System.out.println("Image path for card: " + imagePath);
+                cards.add(card);
             }
         }
 
-        return new Deck(cards.toArray(new Card[] {}));
+        return new Deck(cards.toArray(new Card[0]));
+    }
+
+    private String getImagePath(Card card) {
+        return String.format(IMAGE_PATH_TEMPLATE, card.getSuit().toString().toLowerCase(), card.getValue().toString().toLowerCase());
     }
 }
