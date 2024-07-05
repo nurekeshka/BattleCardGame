@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Image;
 
@@ -17,9 +16,11 @@ import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.WindowConstants;
 
 public class GameFrame extends JFrame {
-
+	private static final Font mainFont = new Font("Tahoma", Font.PLAIN, 8);
+	private static final Font loggerFont = new Font("Tahoma", Font.PLAIN, 7);
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
@@ -27,14 +28,12 @@ public class GameFrame extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameFrame frame = new GameFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				GameFrame frame = new GameFrame();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
@@ -44,7 +43,7 @@ public class GameFrame extends JFrame {
 	 */
 	public GameFrame() {
 		setTitle("Title Upcoming");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,9 +52,8 @@ public class GameFrame extends JFrame {
 
 		JButton btnNextTurn = new JButton("Next Turn");
 		btnNextTurn.setBounds(325, 325, 150, 50);
-		btnNextTurn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
+		btnNextTurn.addActionListener((ActionEvent e) -> {
+
 		});
 		contentPane.setLayout(null);
 
@@ -82,56 +80,56 @@ public class GameFrame extends JFrame {
 				java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imgJS = new ImageIcon(imgTemp); // Half Size - War
 
-		JLabel lblDeck_P1 = new JLabel("");
-		lblDeck_P1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDeck_P1.setBounds(150, 80, 150, 200);
-		lblDeck_P1.setIcon(imgJ);
-		contentPane.add(lblDeck_P1);
+		JLabel playerOneDeckLabel = new JLabel("");
+		playerOneDeckLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		playerOneDeckLabel.setBounds(150, 80, 150, 200);
+		playerOneDeckLabel.setIcon(imgJ);
+		contentPane.add(playerOneDeckLabel);
 
-		JLabel lblDeck_P2 = new JLabel("");
-		lblDeck_P2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDeck_P2.setBounds(500, 80, 150, 200);
-		lblDeck_P2.setIcon(imgJ);
-		contentPane.add(lblDeck_P2);
+		JLabel playerTwoDeckLabel = new JLabel("");
+		playerTwoDeckLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		playerTwoDeckLabel.setBounds(500, 80, 150, 200);
+		playerTwoDeckLabel.setIcon(imgJ);
+		contentPane.add(playerTwoDeckLabel);
 
-		JLabel lblTotal_P1 = new JLabel("Total Cards Count");
-		lblTotal_P1.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		lblTotal_P1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTotal_P1.setBounds(20, 180, 100, 20);
-		contentPane.add(lblTotal_P1);
+		JLabel playerOneTotalLabel = new JLabel("Total Cards Count");
+		playerOneTotalLabel.setFont(mainFont);
+		playerOneTotalLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		playerOneTotalLabel.setBounds(20, 180, 100, 20);
+		contentPane.add(playerOneTotalLabel);
 
-		JLabel lblTotal_P2 = new JLabel("Total Cards Count");
-		lblTotal_P2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTotal_P2.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		lblTotal_P2.setBounds(680, 180, 100, 20);
-		contentPane.add(lblTotal_P2);
+		JLabel playerTwoTotalLabel = new JLabel("Total Cards Count");
+		playerTwoTotalLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		playerTwoTotalLabel.setFont(mainFont);
+		playerTwoTotalLabel.setBounds(680, 180, 100, 20);
+		contentPane.add(playerTwoTotalLabel);
 
-		JLabel lblTotalN_P1 = new JLabel("N");
-		lblTotalN_P1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTotalN_P1.setBounds(20, 200, 100, 20);
-		contentPane.add(lblTotalN_P1);
+		JLabel playerOneCardsLabel = new JLabel("N");
+		playerOneCardsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		playerOneCardsLabel.setBounds(20, 200, 100, 20);
+		contentPane.add(playerOneCardsLabel);
 
-		JLabel lblTotalN_P2 = new JLabel("N");
-		lblTotalN_P2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTotalN_P2.setBounds(680, 200, 100, 20);
-		contentPane.add(lblTotalN_P2);
+		JLabel playerTwoCardsLabel = new JLabel("N");
+		playerTwoCardsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		playerTwoCardsLabel.setBounds(680, 200, 100, 20);
+		contentPane.add(playerTwoCardsLabel);
 
-		JLabel lblWar_P1 = new JLabel("");
-		lblWar_P1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWar_P1.setBounds(310, 130, 75, 100);
-		lblWar_P1.setIcon(imgJS);
-		contentPane.add(lblWar_P1);
+		JLabel playerOneWarLabel = new JLabel("");
+		playerOneWarLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		playerOneWarLabel.setBounds(310, 130, 75, 100);
+		playerOneWarLabel.setIcon(imgJS);
+		contentPane.add(playerOneWarLabel);
 
-		JLabel lblWar_P2 = new JLabel("");
-		lblWar_P2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWar_P2.setBounds(415, 130, 75, 100);
-		lblWar_P2.setIcon(imgJS);
-		contentPane.add(lblWar_P2);
+		JLabel playerTwoWarLabel = new JLabel("");
+		playerTwoWarLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		playerTwoWarLabel.setBounds(415, 130, 75, 100);
+		playerTwoWarLabel.setIcon(imgJS);
+		contentPane.add(playerTwoWarLabel);
 
 		JLabel lblLogs = new JLabel(
 				"Logs: This shows the most recent action taken for better clarity and debug purposes");
 		lblLogs.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblLogs.setFont(new Font("Tahoma", Font.PLAIN, 7));
+		lblLogs.setFont(loggerFont);
 		lblLogs.setBounds(475, 35, 300, 20);
 		contentPane.add(lblLogs);
 	}
