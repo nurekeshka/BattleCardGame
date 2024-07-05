@@ -26,6 +26,6 @@ public class CardsRepositoryImpl implements CardsRepository {
             }
         }
 
-        return new Deck(cards);
-    } 
+        return new Deck(cards.toArray(new Card[] {}));
+    }
 }
