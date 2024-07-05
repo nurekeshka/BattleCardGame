@@ -15,7 +15,9 @@ public class CardsRepositoryImpl implements CardsRepository {
 
     @Override
     public Deck getFullDeck() {
-        throw new UnsupportedOperationException("Unimplemented method 'getFullDeck'");
+
+        System.out.print("hello");
+        return null;
     }
 
 }
