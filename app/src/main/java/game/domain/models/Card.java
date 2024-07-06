@@ -3,8 +3,6 @@ package game.domain.models;
 import game.domain.enums.CardSuit;
 import game.domain.enums.CardValue;
 
-import java.nio.file.Path;
-
 public class Card {
     private final CardSuit suit;
     private final CardValue value;
