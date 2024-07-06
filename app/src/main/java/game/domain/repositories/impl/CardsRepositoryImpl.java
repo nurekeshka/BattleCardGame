@@ -8,16 +8,19 @@ import game.domain.repositories.CardsRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Image;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.io.InputStream;
 
 public class CardsRepositoryImpl implements CardsRepository {
-
-    private static final String IMAGE_PATH_TEMPLATE = "path/to/images/%s_%s.png";
 
     @Override
     public Card getCard(CardSuit suit, CardValue value) {
         Card card = new Card(suit, value);
-        String imagePath = getImagePath(card);
-        System.out.println("Image path for card: " + imagePath);
+        String imagePath = getResourcePath(suit, value);
+        Image image = loadImage(imagePath);
+        System.out.println("Image loaded for card (" + suit + " " + value + "): " + (image != null));
         return card;
     }
 
@@ -28,8 +31,9 @@ public class CardsRepositoryImpl implements CardsRepository {
         for (CardSuit suit : CardSuit.values()) {
             for (CardValue value : CardValue.values()) {
                 Card card = new Card(suit, value);
-                String imagePath = getImagePath(card);
-                System.out.println("Image path for card: " + imagePath);
+                String imagePath = getResourcePath(suit, value);
+                Image image = loadImage(imagePath);
+                System.out.println("Image loaded for card (" + suit + " " + value + "): " + (image != null));
                 cards.add(card);
             }
         }
@@ -37,8 +41,20 @@ public class CardsRepositoryImpl implements CardsRepository {
         return new Deck(cards.toArray(new Card[0]));
     }
 
-    public String getImagePath(Card card) {
-        return String.format(IMAGE_PATH_TEMPLATE, card.getSuit().toString().toLowerCase(), card.getValue().toString().toLowerCase());
+    private String getResourcePath(CardSuit suit, CardValue value) {
+        return String.format("/images/%s_%s.png", suit.toString().toLowerCase(), value.toString().toLowerCase());
+    }
+
+    private Image loadImage(String imagePath) {
+        try (InputStream is = getClass().getResourceAsStream(imagePath)) {
+            if (is != null) {
+                return ImageIO.read(is);
+            } else {
+                System.err.println("Image not found for path: " + imagePath);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
-
