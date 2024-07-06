@@ -37,7 +37,7 @@ public class CardsRepositoryImpl implements CardsRepository {
         return new Deck(cards.toArray(new Card[0]));
     }
 
-    private String getImagePath(Card card) {
+    public String getImagePath(Card card) {
         return String.format(IMAGE_PATH_TEMPLATE, card.getSuit().toString().toLowerCase(), card.getValue().toString().toLowerCase());
     }
 }
