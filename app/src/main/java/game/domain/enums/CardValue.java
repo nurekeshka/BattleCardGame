@@ -15,13 +15,23 @@ public enum CardValue {
     KING(13),
     ACE(14);
 
-    private final int value;
+    private final int numValue;
 
-    private CardValue(int value) {
-        this.value = value;
+    private CardValue(int numValue) {
+        this.numValue = numValue;
     }
 
     public int getValue() {
-        return this.value;
+        return this.numValue;
+    }
+
+    //returns TWO if given 2, JACK if given 11, etc
+    public static String getName(int num) {
+        for (CardValue e : values()) {
+            if (e.numValue == num) {
+                return e.name();
+            }
+        }
+        return "";
     }
 }
