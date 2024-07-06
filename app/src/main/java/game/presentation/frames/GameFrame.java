@@ -4,6 +4,8 @@ import game.domain.enums.CardSuit;
 import game.domain.enums.CardValue;
 import game.domain.models.Card;
 import game.domain.models.Deck;
+import game.domain.repositories.CardsRepository;
+import game.infrastructure.logic.GameLogic;
 import game.infrastructure.logic.impl.GameLogicImpl;
 
 import java.awt.EventQueue;
@@ -29,6 +31,14 @@ public class GameFrame extends JFrame {
 	private static final Font loggerFont = new Font("Tahoma", Font.PLAIN, 7);
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+
+	private GameLogic gameLogic;
+	private CardsRepository cardsRepository;
+
+	public GameFrame(GameLogic gameLogic, CardsRepository cardsRepository) {
+		this.gameLogic = gameLogic;
+		this.cardsRepository = cardsRepository;
+	}
 
 	/**
 	 * Launch the application.
