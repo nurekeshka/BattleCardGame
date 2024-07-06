@@ -15,6 +15,8 @@ import java.io.InputStream;
 
 public class CardsRepositoryImpl implements CardsRepository {
 
+    private static final String IMAGE_PATH_TEMPLATE = "path/to/images/%s_%s.png"; //AmirAli's part added to game-frame branch
+
     @Override
     public Card getCard(CardSuit suit, CardValue value) {
         return new Card(suit, value);
@@ -49,4 +51,9 @@ public class CardsRepositoryImpl implements CardsRepository {
         }
         return null;
     }
+
+    private String getImagePath(Card card) { //AmirAli's part added to game-frame branch
+        return String.format(IMAGE_PATH_TEMPLATE, card.getSuit().toString().toLowerCase(), card.getValue().toString().toLowerCase());
+    }
+
 }

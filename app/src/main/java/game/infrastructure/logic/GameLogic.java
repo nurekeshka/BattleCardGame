@@ -4,5 +4,5 @@ public interface GameLogic {
     // This method should initialize the game process
     public void start();
 
-    public void next();
+    public void next(); //upon pressing next turn button
 }
