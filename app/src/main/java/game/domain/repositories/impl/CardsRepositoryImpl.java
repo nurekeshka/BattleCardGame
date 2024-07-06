@@ -17,11 +17,7 @@ public class CardsRepositoryImpl implements CardsRepository {
 
     @Override
     public Card getCard(CardSuit suit, CardValue value) {
-        Card card = new Card(suit, value);
-        String imagePath = getResourcePath(suit, value);
-        Image image = loadImage(imagePath);
-        System.out.println("Image loaded for card (" + suit + " " + value + "): " + (image != null));
-        return card;
+        return new Card(suit, value);
     }
 
     @Override
@@ -30,11 +26,7 @@ public class CardsRepositoryImpl implements CardsRepository {
 
         for (CardSuit suit : CardSuit.values()) {
             for (CardValue value : CardValue.values()) {
-                Card card = new Card(suit, value);
-                String imagePath = getResourcePath(suit, value);
-                Image image = loadImage(imagePath);
-                System.out.println("Image loaded for card (" + suit + " " + value + "): " + (image != null));
-                cards.add(card);
+                cards.add(new Card(suit, value));
             }
         }
 
@@ -58,4 +50,3 @@ public class CardsRepositoryImpl implements CardsRepository {
         return null;
     }
 }
-
