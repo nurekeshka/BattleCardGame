@@ -1,12 +1,13 @@
 package game.presentation.frames;
 
+import game.application.controls.Guice;
+import game.application.controls.Injector;
+import game.application.initialization.BasicModule;
 import game.domain.enums.CardSuit;
 import game.domain.enums.CardValue;
 import game.domain.models.Card;
-import game.domain.models.Deck;
 import game.domain.repositories.CardsRepository;
 import game.infrastructure.logic.GameLogic;
-import game.infrastructure.logic.impl.GameLogicImpl;
 
 import java.awt.EventQueue;
 
@@ -16,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
+import java.nio.file.Path;
 import java.awt.Image;
 
 import javax.swing.JLabel;
@@ -35,18 +37,11 @@ public class GameFrame extends JFrame {
 	private GameLogic gameLogic;
 	private CardsRepository cardsRepository;
 
-	public GameFrame(GameLogic gameLogic, CardsRepository cardsRepository) {
-		this.gameLogic = gameLogic;
-		this.cardsRepository = cardsRepository;
-	}
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			try {
-				GameFrame frame = new GameFrame();
+				Injector injector = Guice.createInjector(new BasicModule());
+				GameFrame frame = injector.getInstance(GameFrame.class);
 				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -57,7 +52,12 @@ public class GameFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GameFrame() {
+	public GameFrame(GameLogic gameLogic, CardsRepository cardsRepository) {
+		this.gameLogic = gameLogic;
+		this.cardsRepository = cardsRepository;
+	}
+
+	public void init() {
 		setTitle("Title Upcoming");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 480);
@@ -91,7 +91,10 @@ public class GameFrame extends JFrame {
 		contentPane.add(btnNextTurn);
 
 		// IMPORTING IMAGES HERE
-		ImageIcon imgJ = new ImageIcon("PLACEHOLDER_CARD_IMAGE.png"); // Full Size - Deck
+		Card card = new Card(CardSuit.HEARTS, CardValue.ACE);
+		Path path = cardsRepository.getImagePath(card);
+
+		ImageIcon imgJ = new ImageIcon(path.toString()); // Full Size - Deck
 		Image imgTemp = imgJ.getImage().getScaledInstance(imgJ.getIconWidth() / 2, imgJ.getIconHeight() / 2,
 				java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imgJS = new ImageIcon(imgTemp); // Half Size - War
@@ -148,5 +151,6 @@ public class GameFrame extends JFrame {
 		lblLogs.setFont(loggerFont);
 		lblLogs.setBounds(475, 35, 300, 20);
 		contentPane.add(lblLogs);
+		setVisible(true);
 	}
 }
