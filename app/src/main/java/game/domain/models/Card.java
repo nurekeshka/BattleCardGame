@@ -21,4 +21,12 @@ public class Card {
     public CardValue getValue() {
         return value;
     }
+
+    public String toText() {
+        String text = "";
+        text += this.getValue().toString();
+        text += " of ";
+        text += this.getSuit().toString();
+        return text;
+    }
 }

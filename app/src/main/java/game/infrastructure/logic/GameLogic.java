@@ -5,4 +5,6 @@ public interface GameLogic {
     public void start();
 
     public void next(); //upon pressing next turn button
+
+    public void gameEnd(); //when one player runs out of cards, this triggers
 }

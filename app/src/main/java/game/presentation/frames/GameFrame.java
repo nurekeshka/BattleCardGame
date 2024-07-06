@@ -69,7 +69,7 @@ public class GameFrame extends JFrame {
 		JButton btnNextTurn = new JButton("Next Turn");
 		btnNextTurn.setBounds(325, 325, 150, 50);
 		btnNextTurn.addActionListener((ActionEvent e) -> {
-
+			gameLogic.next();
 		});
 		contentPane.setLayout(null);
 
@@ -94,21 +94,23 @@ public class GameFrame extends JFrame {
 		Card card = new Card(CardSuit.HEARTS, CardValue.ACE);
 		Path path = cardsRepository.getImagePath(card);
 
-		ImageIcon imgJ = new ImageIcon(path.toString()); // Full Size - Deck
-		Image imgTemp = imgJ.getImage().getScaledInstance(imgJ.getIconWidth() / 2, imgJ.getIconHeight() / 2,
-				java.awt.Image.SCALE_SMOOTH);
-		ImageIcon imgJS = new ImageIcon(imgTemp); // Half Size - War
+		ImageIcon img1 = new ImageIcon(path.toString()); // Full Size - Deck
+		Image imgTemp;
+		imgTemp = img1.getImage().getScaledInstance(150, 200, Image.SCALE_SMOOTH);
+		img1 = new ImageIcon(imgTemp);
+		imgTemp = img1.getImage().getScaledInstance(img1.getIconWidth() / 2, img1.getIconHeight() / 2, Image.SCALE_SMOOTH);
+		ImageIcon img1Small = new ImageIcon(imgTemp); // Half Size - War
 
 		JLabel playerOneDeckLabel = new JLabel("");
 		playerOneDeckLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		playerOneDeckLabel.setBounds(150, 80, 150, 200);
-		playerOneDeckLabel.setIcon(imgJ);
+		playerOneDeckLabel.setIcon(img1);
 		contentPane.add(playerOneDeckLabel);
 
 		JLabel playerTwoDeckLabel = new JLabel("");
 		playerTwoDeckLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		playerTwoDeckLabel.setBounds(500, 80, 150, 200);
-		playerTwoDeckLabel.setIcon(imgJ);
+		playerTwoDeckLabel.setIcon(img1);
 		contentPane.add(playerTwoDeckLabel);
 
 		JLabel playerOneTotalLabel = new JLabel("Total Cards Count");
@@ -133,17 +135,11 @@ public class GameFrame extends JFrame {
 		playerTwoCardsLabel.setBounds(680, 200, 100, 20);
 		contentPane.add(playerTwoCardsLabel);
 
-		JLabel playerOneWarLabel = new JLabel("");
-		playerOneWarLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		playerOneWarLabel.setBounds(310, 130, 75, 100);
-		playerOneWarLabel.setIcon(imgJS);
-		contentPane.add(playerOneWarLabel);
-
-		JLabel playerTwoWarLabel = new JLabel("");
-		playerTwoWarLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		playerTwoWarLabel.setBounds(415, 130, 75, 100);
-		playerTwoWarLabel.setIcon(imgJS);
-		contentPane.add(playerTwoWarLabel);
+		JLabel warLabel = new JLabel("");
+		warLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		warLabel.setBounds(362, 130, 75, 100);
+		warLabel.setIcon(img1Small);
+		contentPane.add(warLabel);
 
 		JLabel lblLogs = new JLabel(
 				"Logs: This shows the most recent action taken for better clarity and debug purposes");
