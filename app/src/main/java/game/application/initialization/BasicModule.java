@@ -6,6 +6,7 @@ import game.domain.repositories.impl.CardsRepositoryImpl;
 import game.infrastructure.logic.GameLogic;
 import game.infrastructure.logic.impl.GameLogicImpl;
 import game.infrastructure.progress.GameSaver;
+import game.presentation.frames.GameFrame;
 
 public class BasicModule extends AbstractModule {
     @Override
@@ -13,5 +14,6 @@ public class BasicModule extends AbstractModule {
         bind(CardsRepository.class, CardsRepositoryImpl.class);
         bind(GameLogic.class, GameLogicImpl.class);
         bind(GameSaver.class, GameLogicImpl.class);
+        bind(GameFrame.class, GameFrame.class);
     }
 }
