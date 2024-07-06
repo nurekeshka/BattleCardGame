@@ -1,5 +1,11 @@
 package game.presentation.frames;
 
+import game.domain.enums.CardSuit;
+import game.domain.enums.CardValue;
+import game.domain.models.Card;
+import game.domain.models.Deck;
+import game.infrastructure.logic.impl.GameLogicImpl;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;

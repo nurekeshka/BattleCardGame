@@ -9,6 +9,10 @@ import java.util.Collections;
 public class Deck {
     private Queue<Card> cards;
 
+    public Deck() {
+        this.cards = new LinkedList<>();
+    }
+
     public Deck(Card[] content) {
         this.cards = new LinkedList<>();
         Collections.addAll(this.cards, content);
