@@ -41,3 +41,4 @@ public class CardsRepositoryImpl implements CardsRepository {
         return String.format(IMAGE_PATH_TEMPLATE, card.getSuit().toString().toLowerCase(), card.getValue().toString().toLowerCase());
     }
 }
+
