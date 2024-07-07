@@ -62,13 +62,4 @@ public class GameLogicImpl implements GameLogic {
         // logMsg("War with " + activeP1.toString() + " VS " + activeP2.toString());
         // }
     }
-
-    public void close() {
-    }
-
-    // message to be displayed in logs frame
-    public void logMsg(String msg) {
-        System.out.println(msg);
-    }
-
 }

@@ -9,8 +9,6 @@ public interface GameLogic {
 
     public void next();
 
-    public void close();
-
     public Game getGameObject();
 
     public void setGameObject(Game gameObject);
