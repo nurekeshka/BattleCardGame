@@ -68,6 +68,10 @@ public class MainFrame extends JFrame {
         return winner;
     }
 
+    public void setWinner(PlayerNames winner) {
+        this.winner = winner;
+    }
+
     public int getWindowWidth() {
         return MainFrame.windowWidth;
     }
