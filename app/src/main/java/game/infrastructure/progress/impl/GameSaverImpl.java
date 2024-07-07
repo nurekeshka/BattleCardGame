@@ -9,9 +9,10 @@ import java.util.Date;
 
 public class GameSaverImpl implements GameSaver {
     // Method to save the game state to a file
-    public void saveGame(Deck[] gameDecks, String filename) throws IOException {
+    public void saveGame(Deck[] gameDecks) throws IOException {
         // Ensure the directory exists where the file will be saved
-        File file = new File(filename);
+        String saveName = "save-" + dateAndTimeAsString();
+        File file = new File(saveName);
 
         // Try-with-resources statement to automatically close the stream after use
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))) {
