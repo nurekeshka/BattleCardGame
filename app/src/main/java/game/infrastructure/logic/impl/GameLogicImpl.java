@@ -1,5 +1,6 @@
 package game.infrastructure.logic.impl;
 
+import game.domain.models.Card;
 import game.domain.models.Game;
 import game.infrastructure.logic.GameLogic;
 import game.infrastructure.progress.GameProgress;
@@ -7,6 +8,9 @@ import game.infrastructure.progress.GameProgress;
 public class GameLogicImpl implements GameLogic {
     private Game gameObject;
     private final GameProgress gameProgress;
+
+    private Card battlingCardLeft;
+    private Card battlingCardRight;
 
     public GameLogicImpl(GameProgress gameProgress) {
         this.gameProgress = gameProgress;
@@ -36,6 +40,22 @@ public class GameLogicImpl implements GameLogic {
     @Override
     public void loadGame() {
         this.setGameObject(this.gameProgress.loadGame());
+    }
+
+    public Card getBattlingCardLeft() {
+        return battlingCardLeft;
+    }
+
+    public Card getBattlingCardRight() {
+        return battlingCardRight;
+    }
+
+    public void setBattlingCardLeft(Card battlingCardLeft) {
+        this.battlingCardLeft = battlingCardLeft;
+    }
+
+    public void setBattlingCardRight(Card battlingCardRight) {
+        this.battlingCardRight = battlingCardRight;
     }
 
     @Override

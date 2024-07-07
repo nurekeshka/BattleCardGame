@@ -1,5 +1,6 @@
 package game.infrastructure.logic;
 
+import game.domain.models.Card;
 import game.domain.models.Game;
 
 public interface GameLogic {
@@ -16,4 +17,13 @@ public interface GameLogic {
     public int getPlayerOneDeckCardsCount();
 
     public int getPlayerTwoDeckCardsCount();
+
+    public Card getBattlingCardLeft();
+
+    public Card getBattlingCardRight();
+
+    public void setBattlingCardLeft(Card battlingCardLeft);
+
+    public void setBattlingCardRight(Card battlingCardRight);
+
 }
