@@ -65,6 +65,7 @@ public class MainFrame extends JFrame {
     public void updateFrame() {
         this.revalidate();
         this.repaint();
+
     }
 
     public PlayerNames getWinner() {
