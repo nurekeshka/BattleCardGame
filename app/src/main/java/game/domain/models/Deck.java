@@ -1,8 +1,5 @@
 package game.domain.models;
 
-import game.domain.enums.CardSuit;
-import game.domain.enums.CardRank;
-
 import java.io.Serializable;
 import java.util.Queue;
 import java.util.LinkedList;
