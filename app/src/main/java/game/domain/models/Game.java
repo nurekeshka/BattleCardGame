@@ -7,10 +7,10 @@ public class Game {
     private Deck buffer;
     private GameState state;
 
-    public Game(Player[] players) {
+    public Game(Player[] players, Deck buffer) {
         this.players = players;
         this.state = GameState.RUNNING;
-        this.buffer = new Deck();
+        this.buffer = buffer;
     }
 
     public Deck getBuffer() {
