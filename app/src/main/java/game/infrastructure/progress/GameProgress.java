@@ -1,5 +1,5 @@
 package game.infrastructure.progress;
 
-public interface GameSaver {
+public interface GameProgress {
 
 }

@@ -103,6 +103,10 @@ public class GamePanel extends JPanel {
         return this;
     }
 
+    public ImageIcon getImage(Card card) {
+        return new ImageIcon(this.cardsRepository.getImagePath(card).toString());
+    }
+
     public void setMenuConfiguration() {
         String[] authorsList = new String[] { "Amirali", "Eslam", "Ulukbek", "Michael", "Miras", "Nurbek", "Omar" };
 
