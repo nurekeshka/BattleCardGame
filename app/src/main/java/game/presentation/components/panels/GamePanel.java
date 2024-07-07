@@ -89,12 +89,12 @@ public class GamePanel extends JPanel {
         JLabel playerOneDeckLabel = new PlayerDeckLabel(
                 this.getCardImage(this.gameLogic.getBattlingCardLeft(), 150, 200));
         playerOneDeckLabel.setBounds(150, 80, 150, 200);
-        add(playerOneDeckLabel);
 
         JLabel playerTwoDeckLabel = new PlayerDeckLabel(
                 this.getCardImage(this.gameLogic.getBattlingCardRight(), 150, 200));
         playerTwoDeckLabel.setBounds(500, 80, 150, 200);
 
+        add(playerOneDeckLabel);
         add(playerTwoDeckLabel);
     }
 
