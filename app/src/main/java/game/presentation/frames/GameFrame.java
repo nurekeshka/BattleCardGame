@@ -34,8 +34,8 @@ public class GameFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	private GameLogic gameLogic;
-	private CardsRepository cardsRepository;
+	private final GameLogic gameLogic;
+	private final CardsRepository cardsRepository;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
@@ -98,7 +98,8 @@ public class GameFrame extends JFrame {
 		Image imgTemp;
 		imgTemp = img1.getImage().getScaledInstance(150, 200, Image.SCALE_SMOOTH);
 		img1 = new ImageIcon(imgTemp);
-		imgTemp = img1.getImage().getScaledInstance(img1.getIconWidth() / 2, img1.getIconHeight() / 2, Image.SCALE_SMOOTH);
+		imgTemp = img1.getImage().getScaledInstance(img1.getIconWidth() / 2, img1.getIconHeight() / 2,
+				Image.SCALE_SMOOTH);
 		ImageIcon img1Small = new ImageIcon(imgTemp); // Half Size - War
 
 		JLabel playerOneDeckLabel = new JLabel("");
