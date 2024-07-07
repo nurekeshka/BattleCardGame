@@ -19,7 +19,7 @@ public class CardsRepositoryImpl implements CardsRepository {
 
     @Override
     public Card getCard(String suit, String rank) {
-        return null;
+        return new Card(CardSuit.valueOf(suit), CardRank.valueOf(rank));
     }
 
     @Override
