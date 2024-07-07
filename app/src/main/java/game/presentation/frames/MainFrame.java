@@ -12,6 +12,7 @@ import game.presentation.components.panels.MenuPanel;
 public class MainFrame extends JFrame {
     private static int windowWidth = 600;
     private static int windowHeight = 400;
+    private static String windowTitle = "Battle Card Game";
 
     public void init() {
         this.setWindowConfiguration();
@@ -31,7 +32,7 @@ public class MainFrame extends JFrame {
     }
 
     public void setWindowConfiguration() {
-        setTitle("Battle Card Game");
+        setTitle(MainFrame.windowTitle);
 
         setSize(MainFrame.windowWidth, MainFrame.windowHeight);
         setMinimumSize(new Dimension(MainFrame.windowWidth, MainFrame.windowHeight));
