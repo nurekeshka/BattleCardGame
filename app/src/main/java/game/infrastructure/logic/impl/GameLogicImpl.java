@@ -3,13 +3,16 @@ package game.infrastructure.logic.impl;
 import game.domain.models.Game;
 import game.domain.repositories.CardsRepository;
 import game.infrastructure.logic.GameLogic;
+import game.infrastructure.progress.GameProgress;
 
 public class GameLogicImpl implements GameLogic {
     private Game gameObject;
-    private CardsRepository cardsRepository;
+    private final GameProgress gameProgress;
+    private final CardsRepository cardsRepository;
 
-    public GameLogicImpl(CardsRepository cardsRepository) {
+    public GameLogicImpl(CardsRepository cardsRepository, GameProgress gameProgress) {
         this.cardsRepository = cardsRepository;
+        this.gameProgress = gameProgress;
     }
 
     public Game getGameObject() {
@@ -29,11 +32,13 @@ public class GameLogicImpl implements GameLogic {
     }
 
     @Override
-    public void start() {
-        this.gameObject.setBuffer(this.cardsRepository.getFullDeck());
-        this.gameObject.getBuffer().shuffle();
-        this.gameObject.getPlayerOneDeck().addCardsOnTop(this.gameObject.getBuffer().takeCardsFromBottom(26));
-        this.gameObject.getPlayerTwoDeck().addCardsOnTop(this.gameObject.getBuffer().takeCardsFromBottom(26));
+    public void newGame() {
+        this.setGameObject(this.gameProgress.newGame());
+    }
+
+    @Override
+    public void loadGame() {
+        this.setGameObject(this.gameProgress.loadGame());
     }
 
     @Override

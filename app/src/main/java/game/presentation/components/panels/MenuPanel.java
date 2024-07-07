@@ -1,11 +1,12 @@
 package game.presentation.components.panels;
 
-import javax.swing.*;
-
 import game.domain.enums.GamePanels;
 import game.presentation.frames.MainFrame;
 
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
 public class MenuPanel extends JPanel {

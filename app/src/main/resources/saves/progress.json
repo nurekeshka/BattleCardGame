@@ -1,0 +1,32 @@
+{
+    "playerOne": [
+        {
+            "suit": "diamons",
+            "value": "ace"
+        },
+        {
+            "suit": "diamons",
+            "value": "king"
+        }
+    ],
+    "playerTwo": [
+        {
+            "suit": "spikes",
+            "value": "2"
+        },
+        {
+            "suit": "hearts",
+            "value": "4"
+        }
+    ],
+    "buffer": [
+        {
+            "suit": "spikes",
+            "value": "2"
+        },
+        {
+            "suit": "hearts",
+            "value": "4"
+        }
+    ]
+}

@@ -3,7 +3,9 @@ package game.infrastructure.logic;
 import game.domain.models.Game;
 
 public interface GameLogic {
-    public void start();
+    public void newGame();
+
+    public void loadGame();
 
     public void next();
 

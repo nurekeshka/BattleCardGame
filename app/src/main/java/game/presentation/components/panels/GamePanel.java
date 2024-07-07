@@ -7,17 +7,19 @@ import game.domain.enums.CardRank;
 import game.domain.models.Card;
 import game.domain.repositories.CardsRepository;
 import game.infrastructure.logic.GameLogic;
+import game.infrastructure.progress.GameProgress;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.nio.file.Path;
 import java.awt.Image;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -32,17 +34,49 @@ public class GamePanel extends JPanel {
     private static final long serialVersionUID = 1L;
 
     private final transient GameLogic gameLogic;
+    private final transient GameProgress gameProgress;
     private final transient CardsRepository cardsRepository;
 
-    public GamePanel(GameLogic gameLogic, CardsRepository cardsRepository) {
+    public GamePanel(GameLogic gameLogic, CardsRepository cardsRepository, GameProgress gameProgress) {
         this.gameLogic = gameLogic;
+        this.gameProgress = gameProgress;
         this.cardsRepository = cardsRepository;
     }
 
     public GamePanel init(MainFrame main) {
         this.setPanelConfiguration(main);
-        this.setMenuConfiguration();
 
+        if (this.gameProgress.exists()) {
+            this.newGameOrLoad();
+        } else {
+            this.foo();
+        }
+
+        return this;
+    }
+
+    public void newGameOrLoad() {
+        this.setLayout(new GridLayout(2, 1, 10, 10));
+
+        JButton continueButton = new JButton("Continue the Game?");
+        JButton newGameButton = new JButton("New Game");
+
+        newGameButton.addActionListener((ActionEvent e) -> this.startNewGame());
+        continueButton.addActionListener((ActionEvent e) -> this.continueGame());
+
+        this.add(continueButton);
+        this.add(newGameButton);
+    }
+
+    public void startNewGame() {
+        this.gameLogic.newGame();
+    }
+
+    public void continueGame() {
+        this.gameLogic.loadGame();
+    }
+
+    public void foo() {
         JButton btnNextTurn = new JButton("Next Turn");
         btnNextTurn.setBounds(325, 325, 150, 50);
         btnNextTurn.addActionListener((ActionEvent e) -> gameLogic.next());
@@ -99,8 +133,6 @@ public class GamePanel extends JPanel {
         lblLogs.setBounds(475, 35, 300, 20);
         add(lblLogs);
         setVisible(true);
-
-        return this;
     }
 
     public ImageIcon getImage(Card card) {
