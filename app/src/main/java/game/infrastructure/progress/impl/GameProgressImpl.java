@@ -52,8 +52,9 @@ public class GameProgressImpl implements GameProgress {
         reader.close();
 
         Player[] players = this.getPlayers(object);
+        Deck bufferDeck = this.getBufferDeck(object);
 
-        return null;
+        return new Game(players, bufferDeck);
     }
 
     public Player[] getPlayers(JsonObject object) {
@@ -68,10 +69,14 @@ public class GameProgressImpl implements GameProgress {
     }
 
     public Player getPlayer(JsonObject object) {
-        return new Player(object.getString("name"), this.getPlayerDeck(object.getJsonArray("deck")));
+        return new Player(object.getString("name"), this.getDeckFromJsonArray(object.getJsonArray("deck")));
     }
 
-    public Deck getPlayerDeck(JsonArray array) {
+    public Deck getBufferDeck(JsonObject object) {
+        return this.getDeckFromJsonArray(object.getJsonArray(bufferName));
+    }
+
+    public Deck getDeckFromJsonArray(JsonArray array) {
         List<Card> cards = new ArrayList<>();
 
         for (JsonValue cardValue : array) {
