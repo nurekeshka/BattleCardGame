@@ -31,6 +31,7 @@ public class GameProgressImpl implements GameProgress {
     private static Path gameSavePath = Paths.get("src", "main", "resources", "saves", "progress.json");
 
     private static String playersArrayName = "players";
+    private static String battleCardName = "battle-card";
     private static String bufferName = "buffer";
     private static String suitName = "suit";
     private static String rankName = "rank";
@@ -80,7 +81,8 @@ public class GameProgressImpl implements GameProgress {
     }
 
     public Player getPlayer(JsonObject object) {
-        return new Player(object.getString("name"), this.getDeckFromJsonArray(object.getJsonArray("deck")));
+        return new Player(object.getString("name"), this.getDeckFromJsonArray(object.getJsonArray("deck")),
+                this.getCardFromJsonObject(object.getJsonObject(battleCardName)));
     }
 
     public Deck getBufferDeck(JsonObject object) {
@@ -92,10 +94,14 @@ public class GameProgressImpl implements GameProgress {
 
         for (JsonValue cardValue : array) {
             JsonObject cardObject = cardValue.asJsonObject();
-            cards.add(this.cardsRepository.getCard(cardObject.getString(suitName), cardObject.getString(rankName)));
+            cards.add(this.getCardFromJsonObject(cardObject));
         }
 
         return new Deck(cards.toArray(new Card[] {}));
+    }
+
+    public Card getCardFromJsonObject(JsonObject object) {
+        return this.cardsRepository.getCard(object.getString(suitName), object.getString(rankName));
     }
 
     public void saveGame(Game game) {
@@ -131,9 +137,9 @@ public class GameProgressImpl implements GameProgress {
         playerBuilder.add("name", player.getName());
 
         if (player.getBattleCard() == null) {
-            playerBuilder.add("battle-card", Json.createObjectBuilder().build());
+            playerBuilder.add(battleCardName, Json.createObjectBuilder().build());
         } else {
-            playerBuilder.add("battle-card", this.saveCard(player.getBattleCard()));
+            playerBuilder.add(battleCardName, this.saveCard(player.getBattleCard()));
 
         }
 
