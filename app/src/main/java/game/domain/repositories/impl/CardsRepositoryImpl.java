@@ -13,8 +13,13 @@ import java.nio.file.Paths;
 
 public class CardsRepositoryImpl implements CardsRepository {
     @Override
-    public Card getCard(CardSuit suit, CardRank value) {
-        return new Card(suit, value);
+    public Card getCard(CardSuit suit, CardRank rank) {
+        return new Card(suit, rank);
+    }
+
+    @Override
+    public Card getCard(String suit, String rank) {
+        return null;
     }
 
     @Override
@@ -22,8 +27,8 @@ public class CardsRepositoryImpl implements CardsRepository {
         List<Card> cards = new ArrayList<>();
 
         for (CardSuit suit : CardSuit.values()) {
-            for (CardRank value : CardRank.values()) {
-                cards.add(new Card(suit, value));
+            for (CardRank rank : CardRank.values()) {
+                cards.add(new Card(suit, rank));
             }
         }
 
@@ -33,6 +38,6 @@ public class CardsRepositoryImpl implements CardsRepository {
     @Override
     public Path getImagePath(Card card) {
         return Paths.get("src", "main", "resources", card.getSuit().toString().toLowerCase(),
-                String.format("%d.png", card.getValue().getRank()));
+                String.format("%d.png", card.getRank().getRank()));
     }
 }
