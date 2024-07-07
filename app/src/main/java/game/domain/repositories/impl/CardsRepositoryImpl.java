@@ -37,6 +37,10 @@ public class CardsRepositoryImpl implements CardsRepository {
 
     @Override
     public Path getImagePath(Card card) {
+        if (card.getRank() == null || card.getSuit() == null) {
+            return Paths.get("src", "main", "resources", "common", "cover.png");
+        }
+
         return Paths.get("src", "main", "resources", card.getSuit().toString().toLowerCase(),
                 String.format("%d.png", card.getRank().getRank()));
     }
