@@ -34,7 +34,7 @@ public class MainFrame extends JFrame {
 
     public void init() {
         this.setWindowConfiguration();
-        this.switchToPanel(GamePanels.MENU);
+        this.switchToPanel(GamePanels.GAME);
     }
 
     public void switchToPanel(GamePanels panel) {

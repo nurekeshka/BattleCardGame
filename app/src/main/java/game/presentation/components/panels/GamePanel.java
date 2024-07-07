@@ -22,6 +22,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import game.presentation.components.labels.PlayerDeckLabel;
+import game.presentation.components.labels.TotalCardsLabel;
 import game.presentation.frames.MainFrame;
 
 public class GamePanel extends JPanel {
@@ -29,8 +31,8 @@ public class GamePanel extends JPanel {
     private static final Font loggerFont = new Font("Tahoma", Font.PLAIN, 7);
     private static final long serialVersionUID = 1L;
 
-    private final GameLogic gameLogic;
-    private final CardsRepository cardsRepository;
+    private final transient GameLogic gameLogic;
+    private final transient CardsRepository cardsRepository;
 
     public GamePanel(GameLogic gameLogic, CardsRepository cardsRepository) {
         this.gameLogic = gameLogic;
@@ -38,34 +40,15 @@ public class GamePanel extends JPanel {
     }
 
     public GamePanel init(MainFrame main) {
-        setBounds(100, 100, main.getWindowWidth(), main.getWindowHeight());
-        setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.setPanelConfiguration(main);
+        this.setMenuConfiguration();
 
         JButton btnNextTurn = new JButton("Next Turn");
         btnNextTurn.setBounds(325, 325, 150, 50);
-        btnNextTurn.addActionListener((ActionEvent e) -> {
-            gameLogic.next();
-        });
+        btnNextTurn.addActionListener((ActionEvent e) -> gameLogic.next());
         setLayout(null);
-
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.setBounds(0, 0, 786, 25);
-        add(menuBar);
-
-        JMenu mnAbout = new JMenu("About");
-        menuBar.add(mnAbout);
-
-        JMenuItem mntmMenuItem1 = new JMenuItem("Code: Name(s)");
-        mnAbout.add(mntmMenuItem1);
-
-        JMenuItem mntmMenuItem2 = new JMenuItem("UI: Name(s)");
-        mnAbout.add(mntmMenuItem2);
-
-        JMenuItem mntmMenuItem3 = new JMenuItem("Images: Name(s)");
-        mnAbout.add(mntmMenuItem3);
         add(btnNextTurn);
 
-        // IMPORTING IMAGES HERE
         Card card = new Card(CardSuit.HEARTS, CardRank.ACE);
         Path path = cardsRepository.getImagePath(card);
 
@@ -77,27 +60,19 @@ public class GamePanel extends JPanel {
                 Image.SCALE_SMOOTH);
         ImageIcon img1Small = new ImageIcon(imgTemp); // Half Size - War
 
-        JLabel playerOneDeckLabel = new JLabel("");
-        playerOneDeckLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel playerOneDeckLabel = new PlayerDeckLabel(img1);
         playerOneDeckLabel.setBounds(150, 80, 150, 200);
-        playerOneDeckLabel.setIcon(img1);
         add(playerOneDeckLabel);
 
-        JLabel playerTwoDeckLabel = new JLabel("");
-        playerTwoDeckLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel playerTwoDeckLabel = new PlayerDeckLabel(img1);
         playerTwoDeckLabel.setBounds(500, 80, 150, 200);
-        playerTwoDeckLabel.setIcon(img1);
         add(playerTwoDeckLabel);
 
-        JLabel playerOneTotalLabel = new JLabel("Total Cards Count");
-        playerOneTotalLabel.setFont(mainFont);
-        playerOneTotalLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel playerOneTotalLabel = new TotalCardsLabel(mainFont);
         playerOneTotalLabel.setBounds(20, 180, 100, 20);
         add(playerOneTotalLabel);
 
-        JLabel playerTwoTotalLabel = new JLabel("Total Cards Count");
-        playerTwoTotalLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        playerTwoTotalLabel.setFont(mainFont);
+        JLabel playerTwoTotalLabel = new TotalCardsLabel(mainFont);
         playerTwoTotalLabel.setBounds(680, 180, 100, 20);
         add(playerTwoTotalLabel);
 
@@ -126,5 +101,25 @@ public class GamePanel extends JPanel {
         setVisible(true);
 
         return this;
+    }
+
+    public void setMenuConfiguration() {
+        String[] authorsList = new String[] { "Amirali", "Eslam", "Ulukbek", "Michael", "Miras", "Nurbek", "Omar" };
+
+        JMenuBar menu = new JMenuBar();
+        JMenu authors = new JMenu("Authors");
+
+        for (String author : authorsList) {
+            authors.add(new JMenuItem(author));
+        }
+
+        menu.setBounds(0, 0, 786, 25);
+        menu.add(authors);
+        this.add(menu);
+    }
+
+    public void setPanelConfiguration(MainFrame main) {
+        setBounds(100, 100, main.getWindowWidth(), main.getWindowHeight());
+        setBorder(new EmptyBorder(5, 5, 5, 5));
     }
 }
