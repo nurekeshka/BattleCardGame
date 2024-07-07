@@ -1,3 +1,5 @@
+package game.presentation.frames;
+
 import javax.swing.*;
 import java.awt.*;
 
