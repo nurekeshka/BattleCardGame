@@ -24,11 +24,11 @@ public class MainFrame extends JFrame {
         this.getContentPane().removeAll();
 
         if (panel == GamePanels.MENU) {
-            this.getContentPane().add(new MenuPanel());
+            this.getContentPane().add(new MenuPanel(this));
         } else if (panel == GamePanels.GAME) {
-            this.getContentPane().add(new GamePanel());
+            this.getContentPane().add(new GamePanel(this));
         } else if (panel == GamePanels.FINAL) {
-            this.getContentPane().add(new FinalPanel());
+            this.getContentPane().add(new FinalPanel(this));
         }
 
         this.updateFrame();
