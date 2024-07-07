@@ -2,12 +2,12 @@ package game.application.initialization;
 
 import game.application.controls.Guice;
 import game.application.controls.Injector;
-import game.presentation.frames.GameFrame;
+import game.presentation.frames.MainFrame;
 
 public class App {
     public static void main(String[] args) {
         Injector injector = Guice.createInjector(new BasicModule());
-        GameFrame frame = injector.getInstance(GameFrame.class);
-        frame.init();
+        MainFrame main = injector.getInstance(MainFrame.class);
+        main.init();
     }
 }

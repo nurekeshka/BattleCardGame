@@ -8,6 +8,7 @@ import game.infrastructure.logic.impl.GameLogicImpl;
 import game.infrastructure.progress.GameSaver;
 import game.infrastructure.progress.impl.GameSaverImpl;
 import game.presentation.frames.GameFrame;
+import game.presentation.frames.MainFrame;
 
 public class BasicModule extends AbstractModule {
     @Override
@@ -16,5 +17,6 @@ public class BasicModule extends AbstractModule {
         bind(GameLogic.class, GameLogicImpl.class);
         bind(GameSaver.class, GameSaverImpl.class);
         bind(GameFrame.class, GameFrame.class);
+        bind(MainFrame.class, MainFrame.class);
     }
 }
