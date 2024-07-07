@@ -1,47 +1,30 @@
 package game.presentation.components.panels;
 
 import javax.swing.*;
+
+import game.domain.enums.GamePanels;
+import game.presentation.frames.MainFrame;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MenuPanel extends JPanel {
-    public MenuPanel() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 1, 10, 10));
+    String[] buttons = new String[] { "Play", "Exit" };
 
-        JButton startButton = new JButton("Start new game");
-        JButton contgameButton = new JButton("Continue existing game");
-        JButton exitButton = new JButton("Quit the game");
+    public MenuPanel(MainFrame main) {
+        JPanel menuPanel = new JPanel();
 
-        panel.add(startButton);
-        panel.add(contgameButton);
-        panel.add(exitButton);
+        JButton playButton = new JButton(buttons[0]);
+        JButton exitButton = new JButton(buttons[1]);
 
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Starting the Game...");
-            }
-        });
+        menuPanel.setLayout(new GridLayout(this.buttons.length, 1, 10, 10));
 
-        contgameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Code to show options
-                JOptionPane.showMessageDialog(null, "Last game is opening...");
-            }
-        });
+        menuPanel.add(playButton);
+        menuPanel.add(exitButton);
 
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Code to exit the game
-                System.exit(0);
-            }
-        });
+        playButton.addActionListener((ActionEvent e) -> main.switchToPanel(GamePanels.GAME));
+        exitButton.addActionListener((ActionEvent e) -> System.exit(0));
 
-        add(panel);
-        setVisible(true);
+        this.add(menuPanel);
     }
 }
