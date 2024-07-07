@@ -4,8 +4,11 @@ import game.application.controls.Guice;
 import game.application.controls.Injector;
 import game.application.initialization.BasicModule;
 import game.domain.enums.CardSuit;
+import game.domain.enums.PlayerNames;
 import game.domain.enums.CardRank;
 import game.domain.models.Card;
+import game.domain.models.Game;
+import game.domain.models.Player;
 import game.domain.repositories.CardsRepository;
 import game.infrastructure.logic.GameLogic;
 
@@ -149,5 +152,14 @@ public class GameFrame extends JFrame {
 		lblLogs.setBounds(475, 35, 300, 20);
 		contentPane.add(lblLogs);
 		setVisible(true);
+	}
+
+	private void startGame() {
+		Player[] players = new Player[] {
+				new Player(PlayerNames.PLAYER_ONE.toString(), null),
+				new Player(PlayerNames.PLAYER_TWO.toString(), null)
+		};
+		this.gameLogic.setGameObject((new Game(players)));
+		this.gameLogic.start();
 	}
 }
