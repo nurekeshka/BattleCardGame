@@ -13,7 +13,18 @@ import game.presentation.components.panels.MenuPanel;
 public class MainFrame extends JFrame {
     private static int windowWidth = 600;
     private static int windowHeight = 400;
+
     private static String windowTitle = "Battle Card Game";
+
+    private final MenuPanel menuPanel;
+    private final GamePanel gamePanel;
+    private final FinalPanel finalPanel;
+
+    public MainFrame(MenuPanel menuPanel, GamePanel gamePanel, FinalPanel finalPanel) {
+        this.menuPanel = menuPanel;
+        this.gamePanel = gamePanel;
+        this.finalPanel = finalPanel;
+    }
 
     public void init() {
         this.setWindowConfiguration();
@@ -24,11 +35,11 @@ public class MainFrame extends JFrame {
         this.getContentPane().removeAll();
 
         if (panel == GamePanels.MENU) {
-            this.getContentPane().add(new MenuPanel(this));
+            this.getContentPane().add(this.menuPanel.init(this));
         } else if (panel == GamePanels.GAME) {
-            this.getContentPane().add(new GamePanel(this));
+            this.getContentPane().add(this.gamePanel.init(this));
         } else if (panel == GamePanels.FINAL) {
-            this.getContentPane().add(new FinalPanel(this));
+            this.getContentPane().add(this.finalPanel.init(this));
         }
 
         this.updateFrame();
@@ -48,5 +59,13 @@ public class MainFrame extends JFrame {
     public void updateFrame() {
         this.revalidate();
         this.repaint();
+    }
+
+    public static int getWindowWidth() {
+        return windowWidth;
+    }
+
+    public static int getWindowHeight() {
+        return windowHeight;
     }
 }
