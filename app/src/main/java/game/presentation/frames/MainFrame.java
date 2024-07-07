@@ -30,6 +30,8 @@ public class MainFrame extends JFrame {
         } else if (panel == GamePanels.FINAL) {
             this.getContentPane().add(new FinalPanel());
         }
+
+        this.updateFrame();
     }
 
     public void setWindowConfiguration() {
@@ -41,5 +43,10 @@ public class MainFrame extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    public void updateFrame() {
+        this.revalidate();
+        this.repaint();
     }
 }
