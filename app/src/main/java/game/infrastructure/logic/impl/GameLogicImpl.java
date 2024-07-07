@@ -1,9 +1,5 @@
 package game.infrastructure.logic.impl;
 
-import game.domain.enums.CardSuit;
-import game.domain.enums.CardRank;
-import game.domain.models.Card;
-import game.domain.models.Deck;
 import game.domain.models.Game;
 import game.domain.repositories.CardsRepository;
 import game.infrastructure.logic.GameLogic;
@@ -38,9 +34,6 @@ public class GameLogicImpl implements GameLogic {
         this.gameObject.getBuffer().shuffle();
         this.gameObject.getPlayerOneDeck().addCardsOnTop(this.gameObject.getBuffer().takeCardsFromBottom(26));
         this.gameObject.getPlayerTwoDeck().addCardsOnTop(this.gameObject.getBuffer().takeCardsFromBottom(26));
-
-        System.out.println(this.gameObject.getPlayerOneDeck().toString());
-        System.out.println(this.gameObject.getPlayerTwoDeck().toString());
     }
 
     @Override
