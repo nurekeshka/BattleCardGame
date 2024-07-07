@@ -33,6 +33,6 @@ public class CardsRepositoryImpl implements CardsRepository {
     @Override
     public Path getImagePath(Card card) {
         return Paths.get("src", "main", "resources", card.getSuit().toString().toLowerCase(),
-                String.format("%d.png", card.getValue().getNumValue()));
+                String.format("%d.png", card.getValue().getValue()));
     }
 }
