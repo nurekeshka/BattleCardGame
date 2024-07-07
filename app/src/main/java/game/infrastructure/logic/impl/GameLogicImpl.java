@@ -43,10 +43,18 @@ public class GameLogicImpl implements GameLogic {
     }
 
     public Card getBattlingCardLeft() {
+        if (this.battlingCardLeft == null) {
+            return new Card(null, null);
+        }
+
         return battlingCardLeft;
     }
 
     public Card getBattlingCardRight() {
+        if (this.battlingCardRight == null) {
+            return new Card(null, null);
+        }
+
         return battlingCardRight;
     }
 
@@ -60,26 +68,9 @@ public class GameLogicImpl implements GameLogic {
 
     @Override
     public void next() {
-        // System.out.print("-----TEST 2 - ");
-        // this.deckP1.printDeckSize();
-        // System.out.println("TEST IN NEXT():");
-        // System.out.println("-----TEST - " + deckP1.takeCardsFromBottom().toString());
-        // Card activeP1 = deckP1.takeCardsFromBottom();
-        // Card activeP2 = deckP2.takeCardsFromBottom();
-        // deckBuffer.addCardsOnTop(new Card[] { activeP1, activeP2 });
-
-        // // Compare, add to the winning player if there is one
-        // if (activeP1.getValue().getNumValue() > activeP2.getValue().getNumValue()) {
-        // deckP1.addCardsOnTop(deckBuffer);
-        // deckBuffer.clear(); // clear buffer
-        // logMsg("P1 wins with " + activeP1.toString());
-        // } else if (activeP1.getValue().getNumValue() <
-        // activeP2.getValue().getNumValue()) {
-        // logMsg("P2 wins with " + activeP2.toString());
-        // deckP2.addCardsOnTop(deckBuffer);
-        // deckBuffer.clear(); // clear buffer
-        // } else {
-        // logMsg("War with " + activeP1.toString() + " VS " + activeP2.toString());
-        // }
+        if (this.getBattlingCardLeft() == null || this.getBattlingCardRight() == null) {
+            this.setBattlingCardLeft(this.gameObject.getPlayerOneDeck().takeCardsFromBottom());
+            this.setBattlingCardRight(this.gameObject.getPlayerTwoDeck().takeCardsFromBottom());
+        }
     }
 }
