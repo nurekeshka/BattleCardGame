@@ -40,21 +40,6 @@ public class GameFrame extends JFrame {
 	private final GameLogic gameLogic;
 	private final CardsRepository cardsRepository;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(() -> {
-			try {
-				Injector injector = Guice.createInjector(new BasicModule());
-				GameFrame frame = injector.getInstance(GameFrame.class);
-				frame.setVisible(true);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public GameFrame(GameLogic gameLogic, CardsRepository cardsRepository) {
 		this.gameLogic = gameLogic;
 		this.cardsRepository = cardsRepository;
