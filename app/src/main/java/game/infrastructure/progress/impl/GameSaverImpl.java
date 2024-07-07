@@ -8,13 +8,13 @@ import java.io.*;
 public class GameSave {
     public static void saveGame(Deck deck1, Deck deck2, Deck deck3, String progressFile) throws IOException {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(progress))) {
-            out.writeObject(game);
+            out.writeObject(Deck);
         }
     }
 
-    public static Game loadGame(String progressFile) throws IOException, ClassNotFoundException {
+    public static Deck loadGame(String progressFile) throws IOException, ClassNotFoundException {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(progress))) {
-            return (Game) in.readObject();
+            return (Deck) in.readObject();
         }
     }
 }
