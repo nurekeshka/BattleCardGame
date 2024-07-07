@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import game.domain.enums.GamePanels;
+import game.presentation.components.panels.FinalPanel;
 import game.presentation.components.panels.GamePanel;
 import game.presentation.components.panels.MenuPanel;
 
@@ -27,7 +28,7 @@ public class MainFrame extends JFrame {
         } else if (panel == GamePanels.GAME) {
             this.getContentPane().add(new GamePanel());
         } else if (panel == GamePanels.FINAL) {
-            this.getContentPane().add(new FinalFrame());
+            this.getContentPane().add(new FinalPanel());
         }
     }
 
