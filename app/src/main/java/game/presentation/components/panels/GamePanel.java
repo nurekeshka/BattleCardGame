@@ -81,6 +81,7 @@ public class GamePanel extends JPanel {
         this.clearFrame();
         this.setNextTurnButton();
         this.setLayout(null);
+        this.setPlayerDeckLabels();
         this.setTotalCardsLabels();
         this.setWarBattleLabel();
     }
