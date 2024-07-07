@@ -4,7 +4,7 @@ import game.application.controls.Guice;
 import game.application.controls.Injector;
 import game.presentation.frames.MainFrame;
 
-public class App {
+public class Application {
     public static void main(String[] args) {
         Injector injector = Guice.createInjector(new BasicModule());
         MainFrame main = injector.getInstance(MainFrame.class);

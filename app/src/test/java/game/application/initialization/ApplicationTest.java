@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-class AppTest {
+class ApplicationTest {
     @Test
     void initializationTest() {
         try {
-            new App();
+            new Application();
         } catch (Exception e) {
             fail(e.getMessage());
         }

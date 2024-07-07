@@ -26,7 +26,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("game.application.initialization.App")
+    mainClass.set("game.application.initialization.Application")
 }
 
 tasks.named<Test>("test") {
