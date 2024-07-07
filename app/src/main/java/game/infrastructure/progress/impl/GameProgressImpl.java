@@ -21,9 +21,11 @@ import javax.json.JsonReader;
 import javax.json.JsonValue;
 import javax.json.JsonWriter;
 
-import java.io.StringReader;
+import java.io.IOException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.io.InputStream;
 
 public class GameProgressImpl implements GameProgress {
     private static Path gameSavePath = Paths.get("src", "main", "resources", "saves", "progress.json");
@@ -52,14 +54,18 @@ public class GameProgressImpl implements GameProgress {
     }
 
     public Game loadGame() {
-        JsonReader reader = Json.createReader(new StringReader(GameProgressImpl.gameSavePath.toFile().toString()));
-        JsonObject object = reader.readObject();
-        reader.close();
+        try (InputStream is = new FileInputStream(GameProgressImpl.gameSavePath.toFile().toString());
+                JsonReader reader = Json.createReader(is)) {
+            JsonObject object = reader.readObject();
+            Player[] players = this.getPlayers(object);
+            Deck bufferDeck = this.getBufferDeck(object);
 
-        Player[] players = this.getPlayers(object);
-        Deck bufferDeck = this.getBufferDeck(object);
+            return new Game(players, bufferDeck);
+        } catch (IOException e) {
+            System.exit(0);
+        }
 
-        return new Game(players, bufferDeck);
+        return null;
     }
 
     public Player[] getPlayers(JsonObject object) {
@@ -123,16 +129,21 @@ public class GameProgressImpl implements GameProgress {
         JsonObjectBuilder playerBuilder = Json.createObjectBuilder();
 
         playerBuilder.add("name", player.getName());
-        playerBuilder.add("battle-card", this.saveCard(player.getBattleCard()));
+
+        if (player.getBattleCard() == null) {
+            playerBuilder.add("battle-card", Json.createObjectBuilder().build());
+        } else {
+            playerBuilder.add("battle-card", this.saveCard(player.getBattleCard()));
+
+        }
+
         playerBuilder.add("deck", this.saveDeck(player.getDeck()));
 
         return playerBuilder;
     }
 
     public JsonArrayBuilder saveBuffer(Game game) {
-        JsonArrayBuilder bufferBuilder = Json.createArrayBuilder();
-        bufferBuilder.add(this.saveDeck(game.getBuffer()));
-        return bufferBuilder;
+        return this.saveDeck(game.getBuffer());
     }
 
     public JsonArrayBuilder saveDeck(Deck deck) {
