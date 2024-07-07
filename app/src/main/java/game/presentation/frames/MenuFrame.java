@@ -1,5 +1,7 @@
 package game.presentation.frames;
 
-public class MenuFrame {
+import javax.swing.JPanel;
+
+public class MenuFrame extends JPanel {
 
 }

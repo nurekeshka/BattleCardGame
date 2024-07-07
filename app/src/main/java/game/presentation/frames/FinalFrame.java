@@ -1,7 +1,7 @@
 package game.presentation.frames;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class FinalFrame extends JFrame {
+public class FinalFrame extends JPanel {
 
 }
