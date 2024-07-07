@@ -22,6 +22,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation("com.google.guava:guava:31.1-jre")
+    implementation("org.glassfish:javax.json:1.1.4")
 }
 
 application {
