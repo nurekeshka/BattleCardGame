@@ -61,11 +61,11 @@ public class MainFrame extends JFrame {
         this.repaint();
     }
 
-    public static int getWindowWidth() {
-        return windowWidth;
+    public int getWindowWidth() {
+        return MainFrame.windowWidth;
     }
 
-    public static int getWindowHeight() {
-        return windowHeight;
+    public int getWindowHeight() {
+        return MainFrame.windowHeight;
     }
 }
