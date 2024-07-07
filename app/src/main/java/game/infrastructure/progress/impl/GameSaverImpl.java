@@ -1,7 +1,30 @@
 package game.infrastructure.progress.impl;
 
+import game.domain.models.Deck;
 import game.infrastructure.progress.GameSaver;
 
-public class GameSaverImpl implements GameSaver {
+import java.io.*;
 
+public class GameSaverImpl implements GameSaver {
+    // Method to save the game state to a file
+    public void saveGame(Deck[] gameDecks, String filename) throws IOException {
+        // Ensure the directory exists where the file will be saved
+        File file = new File(filename);
+
+        // Try-with-resources statement to automatically close the stream after use
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))) {
+            // Write the game object to the file
+            out.writeObject(gameDecks); //the 3 decks are deckP1, deckP2 and deckBuffer
+        }
+        System.out.println("---------------FUNCTION SAVEGAME CALLED-----------------------------------");
+    }
+
+    // Method to load the game state from a file
+    public Deck[] loadGame(String filename) throws IOException, ClassNotFoundException {
+        // Try-with-resources statement to automatically close the stream after use
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
+            // Read the game object from the file and return it
+            return (Deck[]) in.readObject();
+        }
+    }
 }

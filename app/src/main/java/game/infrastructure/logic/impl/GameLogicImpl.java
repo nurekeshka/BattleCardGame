@@ -15,16 +15,10 @@ public class GameLogicImpl implements GameLogic {
     @Override
     public void start() {
 
-        deckP1 = new Deck(); //we put all the cards here
+        deckP1 = new Deck(true); //we put all the cards here
         deckP2 = new Deck(); //after we will shuffle and give half the cards here
         deckBuffer = new Deck();
 
-        for (int s = 0; s < 4; s++) { //suits
-            for (int v = 2; v <= 14; v++) { //values
-                Card cardToAdd = new Card(CardSuit.values()[s], CardValue.valueOf(CardValue.getName(v)));
-                deckP1.addCardsOnTop(cardToAdd);
-            }
-        }
         deckP1.shuffle();
         for (int i = 0; i < 26; i++) {
             Card movingCard = deckP1.takeCardsFromBottom();

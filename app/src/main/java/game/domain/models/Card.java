@@ -3,7 +3,9 @@ package game.domain.models;
 import game.domain.enums.CardSuit;
 import game.domain.enums.CardValue;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable {
     private final CardSuit suit;
     private final CardValue value;
 
