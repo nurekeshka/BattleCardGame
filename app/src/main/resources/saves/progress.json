@@ -2,26 +2,34 @@
     "players": [
         {
             "name": "Player One",
+            "battle-card": {
+                "suit": "DIAMONDS",
+                "rank": "ACE"
+            },
             "deck": [
                 {
-                    "suit": "diamons",
-                    "rank": "ace"
+                    "suit": "DIAMONDS",
+                    "rank": "ACE"
                 },
                 {
-                    "suit": "diamons",
-                    "rank": "king"
+                    "suit": "DIAMONDS",
+                    "rank": "KING"
                 }
             ]
         },
         {
             "name": "Player Two",
+            "battle-card": {
+                "suit": "DIAMONDS",
+                "rank": "ACE"
+            },
             "deck": [
                 {
-                    "suit": "spikes",
+                    "suit": "SPADES",
                     "rank": "2"
                 },
                 {
-                    "suit": "hearts",
+                    "suit": "HEARTS",
                     "rank": "4"
                 }
             ]
@@ -29,11 +37,11 @@
     ],
     "buffer": [
         {
-            "suit": "spikes",
+            "suit": "SPADES",
             "rank": "2"
         },
         {
-            "suit": "hearts",
+            "suit": "HEARTS",
             "rank": "4"
         }
     ]

@@ -14,11 +14,16 @@ import java.util.List;
 
 import javax.json.Json;
 import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
 import javax.json.JsonValue;
+import javax.json.JsonWriter;
 
 import java.io.StringReader;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 public class GameProgressImpl implements GameProgress {
     private static Path gameSavePath = Paths.get("src", "main", "resources", "saves", "progress.json");
@@ -85,6 +90,68 @@ public class GameProgressImpl implements GameProgress {
         }
 
         return new Deck(cards.toArray(new Card[] {}));
+    }
+
+    public void saveGame(Game game) {
+        JsonArrayBuilder players = this.savePlayers(game);
+        JsonArrayBuilder buffer = this.saveBuffer(game);
+
+        JsonObjectBuilder gameObject = Json.createObjectBuilder()
+                .add("players", players)
+                .add("buffer", buffer);
+
+        try (OutputStream os = new FileOutputStream("people.json");
+                JsonWriter jsonWriter = Json.createWriter(os)) {
+            jsonWriter.writeObject(gameObject.build());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public JsonArrayBuilder savePlayers(Game game) {
+        JsonArrayBuilder playersBuilder = Json.createArrayBuilder();
+        Player[] players = game.getPlayers();
+
+        for (Player player : players) {
+            playersBuilder.add(this.savePlayer(player));
+        }
+
+        return playersBuilder;
+    }
+
+    public JsonObjectBuilder savePlayer(Player player) {
+        JsonObjectBuilder playerBuilder = Json.createObjectBuilder();
+
+        playerBuilder.add("name", player.getName());
+        // playerBuilder.add("battle-card", this.saveCard())
+
+        return playerBuilder;
+    }
+
+    public JsonArrayBuilder saveBuffer(Game game) {
+        JsonArrayBuilder bufferBuilder = Json.createArrayBuilder();
+        bufferBuilder.add(this.saveDeck(game.getBuffer()));
+        return bufferBuilder;
+    }
+
+    public JsonArrayBuilder saveDeck(Deck deck) {
+        JsonArrayBuilder deckBuilder = Json.createArrayBuilder();
+
+        for (Card card : deck.getCards()) {
+            deckBuilder.add(this.saveCard(card));
+        }
+
+        return deckBuilder;
+    }
+
+    public JsonObjectBuilder saveCard(Card card) {
+        JsonObjectBuilder cardBuilder = Json.createObjectBuilder();
+
+        cardBuilder
+                .add("suit", card.getSuit().toString())
+                .add("rank", card.getRank().toString());
+
+        return cardBuilder;
     }
 
     public boolean exists() {

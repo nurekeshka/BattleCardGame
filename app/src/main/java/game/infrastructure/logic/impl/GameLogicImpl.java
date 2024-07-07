@@ -9,9 +9,6 @@ public class GameLogicImpl implements GameLogic {
     private Game gameObject;
     private final GameProgress gameProgress;
 
-    private Card battlingCardLeft;
-    private Card battlingCardRight;
-
     public GameLogicImpl(GameProgress gameProgress) {
         this.gameProgress = gameProgress;
     }
@@ -53,54 +50,57 @@ public class GameLogicImpl implements GameLogic {
 
     @Override
     public Card getBattlingCardLeft() {
-        if (this.battlingCardLeft == null) {
+        if (this.getGameObject().getPlayers()[0].getBattleCard() == null) {
             return new Card(null, null);
         }
 
-        return battlingCardLeft;
+        return this.getGameObject().getPlayers()[0].getBattleCard();
     }
 
     @Override
     public Card getBattlingCardRight() {
-        if (this.battlingCardRight == null) {
+        if (this.getGameObject().getPlayers()[1].getBattleCard() == null) {
             return new Card(null, null);
         }
 
-        return battlingCardRight;
+        return this.getGameObject().getPlayers()[1].getBattleCard();
     }
 
     @Override
     public void setBattlingCardLeft(Card battlingCardLeft) {
-        this.battlingCardLeft = battlingCardLeft;
+        this.getGameObject().getPlayers()[0].setBattleCard(battlingCardLeft);
     }
 
     @Override
     public void setBattlingCardRight(Card battlingCardRight) {
-        this.battlingCardRight = battlingCardRight;
+        this.getGameObject().getPlayers()[1].setBattleCard(battlingCardRight);
     }
 
     @Override
     public void next() {
-        if (this.battlingCardLeft == null || this.battlingCardRight == null) {
+        if (this.getGameObject().getPlayers()[0].getBattleCard() == null
+                || this.getGameObject().getPlayers()[1].getBattleCard() == null) {
             this.setBattlingCardLeft(this.gameObject.getPlayerOneDeck().takeCardsFromBottom());
             this.setBattlingCardRight(this.gameObject.getPlayerTwoDeck().takeCardsFromBottom());
         } else {
-            if (this.battlingCardLeft.getRank().getInt() > this.battlingCardRight.getRank().getInt()) {
-                this.getGameObject().getPlayerOneDeck().addCardsOnTop(this.battlingCardLeft);
-                this.getGameObject().getPlayerOneDeck().addCardsOnTop(this.battlingCardRight);
-                this.getGameObject().getPlayerOneDeck().addCardsOnTop(this.gameObject.getBuffer().getCards());
-            } else if (this.battlingCardLeft.getRank().getInt() < this.battlingCardRight.getRank().getInt()) {
-                this.getGameObject().getPlayerTwoDeck().addCardsOnTop(this.battlingCardLeft);
-                this.getGameObject().getPlayerTwoDeck().addCardsOnTop(this.battlingCardRight);
-                this.getGameObject().getPlayerTwoDeck().addCardsOnTop(this.gameObject.getBuffer().getCards());
+            if (this.getBattlingCardLeft().getRank().getInt() > this.getBattlingCardRight().getRank().getInt()) {
+                this.getGameObject().getPlayerOneDeck().addCardsOnTop(this.getBattlingCardLeft());
+                this.getGameObject().getPlayerOneDeck().addCardsOnTop(this.getBattlingCardRight());
+                this.getGameObject().getPlayerOneDeck().addCardsOnTop(
+                        this.gameObject.getBuffer().takeCardsFromBottom(this.gameObject.getBuffer().size()));
+            } else if (this.getBattlingCardLeft().getRank().getInt() < this.getBattlingCardRight().getRank().getInt()) {
+                this.getGameObject().getPlayerTwoDeck().addCardsOnTop(this.getBattlingCardLeft());
+                this.getGameObject().getPlayerTwoDeck().addCardsOnTop(this.getBattlingCardRight());
+                this.getGameObject().getPlayerTwoDeck().addCardsOnTop(
+                        this.gameObject.getBuffer().takeCardsFromBottom(this.gameObject.getBuffer().size()));
             } else {
                 this.getGameObject().getBuffer().addCardsOnTop(this.getBattlingCardLeft());
                 this.getGameObject().getBuffer().addCardsOnTop(this.getBattlingCardRight());
 
                 this.getGameObject().getBuffer()
-                        .addCardsOnTop(this.getGameObject().getPlayerOneDeck().takeCardsFromBottom(3));
+                        .addCardsOnTop(this.getGameObject().getPlayerOneDeck().takeCardsFromBottom(2));
                 this.getGameObject().getBuffer()
-                        .addCardsOnTop(this.getGameObject().getPlayerTwoDeck().takeCardsFromBottom(3));
+                        .addCardsOnTop(this.getGameObject().getPlayerTwoDeck().takeCardsFromBottom(2));
             }
 
             this.resetBattleField();
