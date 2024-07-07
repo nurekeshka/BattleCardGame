@@ -11,8 +11,8 @@ import game.presentation.components.panels.GamePanel;
 import game.presentation.components.panels.MenuPanel;
 
 public class MainFrame extends JFrame {
-    private static int windowWidth = 600;
-    private static int windowHeight = 400;
+    private static int windowWidth = 800;
+    private static int windowHeight = 480;
 
     private static String windowTitle = "Battle Card Game";
 
