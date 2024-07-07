@@ -22,11 +22,7 @@ public class Card implements Serializable {
         return value;
     }
 
-    public String toText() {
-        String text = "";
-        text += this.getValue().toString();
-        text += " of ";
-        text += this.getSuit().toString();
-        return text;
+    public String toString() {
+        return String.format("%s of %s", this.getValue().toString(), this.getSuit().toString());
     }
 }

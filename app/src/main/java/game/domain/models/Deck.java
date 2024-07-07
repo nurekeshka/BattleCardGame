@@ -46,10 +46,8 @@ public class Deck implements Serializable {
         }
     }
 
-    //Specifically for adding war deck to any of player's decks
     public void addCardsOnTop(Deck deck) {
-        Card[] cards = deck.getCards();
-        for (Card card : cards) {
+        for (Card card : deck.getCards()) {
             this.cards.add(card);
         }
     }
@@ -74,19 +72,22 @@ public class Deck implements Serializable {
         this.cards = new LinkedList<>(buffer);
     }
 
-    public void printDeck() {
-        Card[] copies = getCards();
-        for (int i = 0; i < copies.length; i++) {
-            System.out.print(copies[i].toText() + "\n");
+    public String toString() {
+        StringBuilder bld = new StringBuilder();
+
+        for (Card card : getCards()) {
+            bld.append(card.toString());
         }
+
+        return bld.toString();
     }
 
-    public void printDeckSize() {
-        System.out.println(getCards().length);
+    public int size() {
+        return this.cards.size();
     }
 
-    public void clearDeck() {
-        this.takeCardsFromBottom(getCards().length);
+    public void clear() {
+        this.cards.clear();
     }
 
 }
