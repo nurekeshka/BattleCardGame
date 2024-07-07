@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import game.domain.enums.GamePanels;
+import game.domain.enums.PlayerNames;
 import game.presentation.components.panels.FinalPanel;
 import game.presentation.components.panels.GamePanel;
 import game.presentation.components.panels.MenuPanel;
@@ -19,6 +20,8 @@ public class MainFrame extends JFrame {
     private final MenuPanel menuPanel;
     private final GamePanel gamePanel;
     private final FinalPanel finalPanel;
+
+    private PlayerNames winner;
 
     public MainFrame(MenuPanel menuPanel, GamePanel gamePanel, FinalPanel finalPanel) {
         this.menuPanel = menuPanel;
@@ -59,6 +62,10 @@ public class MainFrame extends JFrame {
     public void updateFrame() {
         this.revalidate();
         this.repaint();
+    }
+
+    public PlayerNames getWinner() {
+        return winner;
     }
 
     public int getWindowWidth() {
