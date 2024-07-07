@@ -11,7 +11,7 @@ import game.application.controls.Guice;
 import game.application.controls.Injector;
 import game.application.initialization.BasicModule;
 import game.domain.enums.CardSuit;
-import game.domain.enums.CardValue;
+import game.domain.enums.CardRank;
 import game.domain.repositories.CardsRepository;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -19,7 +19,7 @@ class DeckTest {
     private Injector injector;
     private CardsRepository cardsRepository;
 
-    Card cardMock = new Card(CardSuit.CLUBS, CardValue.ACE);
+    Card cardMock = new Card(CardSuit.CLUBS, CardRank.ACE);
 
     @BeforeAll
     public void init() {
