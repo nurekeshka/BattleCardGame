@@ -7,22 +7,22 @@ import java.io.Serializable;
 
 public class Card implements Serializable {
     private final CardSuit suit;
-    private final CardRank value;
+    private final CardRank rank;
 
-    public Card(CardSuit suit, CardRank value) {
+    public Card(CardSuit suit, CardRank rank) {
         this.suit = suit;
-        this.value = value;
+        this.rank = rank;
     }
 
     public CardSuit getSuit() {
         return suit;
     }
 
-    public CardRank getValue() {
-        return value;
+    public CardRank getRank() {
+        return rank;
     }
 
     public String toString() {
-        return String.format("%s of %s", this.getValue().toString(), this.getSuit().toString());
+        return String.format("%s of %s", this.getRank().toString(), this.getSuit().toString());
     }
 }
