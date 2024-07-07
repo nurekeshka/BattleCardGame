@@ -4,11 +4,17 @@ import game.domain.enums.GameState;
 
 public class Game {
     private final Player[] players;
+    private Deck buffer;
     private GameState state;
 
     public Game(Player[] players) {
         this.players = players;
         this.state = GameState.RUNNING;
+        this.buffer = new Deck();
+    }
+
+    public Deck getBuffer() {
+        return buffer;
     }
 
     public void updateGameState(GameState state) {
