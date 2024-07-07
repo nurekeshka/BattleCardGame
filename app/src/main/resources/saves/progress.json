@@ -1,32 +1,40 @@
 {
-    "playerOne": [
+    "players": [
         {
-            "suit": "diamons",
-            "value": "ace"
+            "name": "Player One",
+            "deck": [
+                {
+                    "suit": "diamons",
+                    "rank": "ace"
+                },
+                {
+                    "suit": "diamons",
+                    "rank": "king"
+                }
+            ]
         },
         {
-            "suit": "diamons",
-            "value": "king"
-        }
-    ],
-    "playerTwo": [
-        {
-            "suit": "spikes",
-            "value": "2"
-        },
-        {
-            "suit": "hearts",
-            "value": "4"
+            "name": "Player Two",
+            "deck": [
+                {
+                    "suit": "spikes",
+                    "rank": "2"
+                },
+                {
+                    "suit": "hearts",
+                    "rank": "4"
+                }
+            ]
         }
     ],
     "buffer": [
         {
             "suit": "spikes",
-            "value": "2"
+            "rank": "2"
         },
         {
             "suit": "hearts",
-            "value": "4"
+            "rank": "4"
         }
     ]
 }
