@@ -17,6 +17,10 @@ public class Game {
         return buffer;
     }
 
+    public void setBuffer(Deck buffer) {
+        this.buffer = buffer;
+    }
+
     public void updateGameState(GameState state) {
         this.state = state;
     }
