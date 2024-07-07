@@ -1,6 +1,6 @@
 package game.domain.enums;
 
-public enum CardValue {
+public enum CardRank {
     TWO(2),
     THREE(3),
     FOUR(4),
@@ -15,13 +15,13 @@ public enum CardValue {
     KING(13),
     ACE(14);
 
-    private final int value;
+    private final int rank;
 
-    private CardValue(int value) {
-        this.value = value;
+    private CardRank(int rank) {
+        this.rank = rank;
     }
 
-    public int getValue() {
-        return this.value;
+    public int getRank() {
+        return this.rank;
     }
 }

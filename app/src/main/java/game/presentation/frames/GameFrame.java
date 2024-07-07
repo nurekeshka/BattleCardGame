@@ -4,7 +4,7 @@ import game.application.controls.Guice;
 import game.application.controls.Injector;
 import game.application.initialization.BasicModule;
 import game.domain.enums.CardSuit;
-import game.domain.enums.CardValue;
+import game.domain.enums.CardRank;
 import game.domain.models.Card;
 import game.domain.repositories.CardsRepository;
 import game.infrastructure.logic.GameLogic;
@@ -91,7 +91,7 @@ public class GameFrame extends JFrame {
 		contentPane.add(btnNextTurn);
 
 		// IMPORTING IMAGES HERE
-		Card card = new Card(CardSuit.HEARTS, CardValue.ACE);
+		Card card = new Card(CardSuit.HEARTS, CardRank.ACE);
 		Path path = cardsRepository.getImagePath(card);
 
 		ImageIcon img1 = new ImageIcon(path.toString()); // Full Size - Deck

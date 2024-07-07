@@ -1,7 +1,7 @@
 package game.domain.models;
 
 import game.domain.enums.CardSuit;
-import game.domain.enums.CardValue;
+import game.domain.enums.CardRank;
 
 import java.io.Serializable;
 import java.util.Queue;
@@ -15,16 +15,6 @@ public class Deck implements Serializable {
 
     public Deck() {
         this.cards = new LinkedList<>();
-    }
-
-    public Deck(Boolean standardDeck) {
-        this.cards = new LinkedList<>();
-        for (int s = 0; s < 4; s++) { //suits
-            for (int v = 2; v <= 14; v++) { //values
-                Card cardToAdd = new Card(CardSuit.values()[s], CardValue.valueOf(CardValue.getName(v)));
-                this.addCardsOnTop(cardToAdd);
-            }
-        }
     }
 
     public Deck(Card[] content) {
