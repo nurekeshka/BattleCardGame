@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+import java.awt.Font;
 
 import game.domain.enums.GamePanels;
 import game.domain.enums.PlayerNames;
@@ -16,6 +17,8 @@ public class MainFrame extends JFrame {
     private static int windowHeight = 480;
 
     private static String windowTitle = "Battle Card Game";
+
+    private static Font mainFont = new Font("Serif", Font.BOLD, 18);
 
     private final MenuPanel menuPanel;
     private final GamePanel gamePanel;
@@ -78,5 +81,9 @@ public class MainFrame extends JFrame {
 
     public int getWindowHeight() {
         return MainFrame.windowHeight;
+    }
+
+    public Font getMainFont() {
+        return MainFrame.mainFont;
     }
 }
