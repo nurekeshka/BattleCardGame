@@ -84,6 +84,7 @@ public class GamePanel extends JPanel {
         this.setPlayerDeckLabels();
         this.setTotalCardsLabels();
         this.setBattleLabel();
+        this.setMenuConfiguration();
     }
 
     public void setPlayerDeckLabels() {
@@ -144,10 +145,17 @@ public class GamePanel extends JPanel {
     }
 
     public void setMenuConfiguration() {
-        String[] authorsList = new String[] { "Amirali", "Eslam", "Ulukbek", "Michael", "Miras", "Nurbek", "Omar" };
+        String[] authorsList = new String[] { "Amirali", "Eslam", "Ulukbek", "Mikhail", "Miras", "Nurbek", "Omar" };
 
         JMenuBar menu = new JMenuBar();
         JMenu authors = new JMenu("Authors");
+        JMenu game = new JMenu("Game");
+
+        JButton saveProgress = new JButton("Save");
+
+        saveProgress.addActionListener((ActionEvent e) -> this.gameProgress.saveGame(this.gameLogic.getGameObject()));
+
+        game.add(saveProgress);
 
         for (String author : authorsList) {
             authors.add(new JMenuItem(author));
@@ -155,6 +163,7 @@ public class GamePanel extends JPanel {
 
         menu.setBounds(0, 0, 786, 25);
         menu.add(authors);
+        menu.add(game);
         this.add(menu);
     }
 

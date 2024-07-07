@@ -100,7 +100,7 @@ public class GameProgressImpl implements GameProgress {
                 .add("players", players)
                 .add("buffer", buffer);
 
-        try (OutputStream os = new FileOutputStream("people.json");
+        try (OutputStream os = new FileOutputStream(gameSavePath.toString());
                 JsonWriter jsonWriter = Json.createWriter(os)) {
             jsonWriter.writeObject(gameObject.build());
         } catch (Exception e) {
@@ -123,7 +123,8 @@ public class GameProgressImpl implements GameProgress {
         JsonObjectBuilder playerBuilder = Json.createObjectBuilder();
 
         playerBuilder.add("name", player.getName());
-        // playerBuilder.add("battle-card", this.saveCard())
+        playerBuilder.add("battle-card", this.saveCard(player.getBattleCard()));
+        playerBuilder.add("deck", this.saveDeck(player.getDeck()));
 
         return playerBuilder;
     }

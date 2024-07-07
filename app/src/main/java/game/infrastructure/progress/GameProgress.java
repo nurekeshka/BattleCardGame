@@ -7,5 +7,7 @@ public interface GameProgress {
 
     public Game loadGame();
 
+    public void saveGame(Game game);
+
     public boolean exists();
 }
