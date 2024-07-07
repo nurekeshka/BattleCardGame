@@ -68,9 +68,28 @@ public class GameLogicImpl implements GameLogic {
 
     @Override
     public void next() {
-        if (this.getBattlingCardLeft() == null || this.getBattlingCardRight() == null) {
+        if (this.battlingCardLeft == null || this.battlingCardRight == null) {
             this.setBattlingCardLeft(this.gameObject.getPlayerOneDeck().takeCardsFromBottom());
             this.setBattlingCardRight(this.gameObject.getPlayerTwoDeck().takeCardsFromBottom());
+        } else {
+            if (this.battlingCardLeft.getRank().getInt() > this.battlingCardRight.getRank().getInt()) {
+                this.getGameObject().getPlayerOneDeck().addCardsOnTop(this.battlingCardLeft);
+                this.getGameObject().getPlayerOneDeck().addCardsOnTop(this.battlingCardRight);
+                this.getGameObject().getPlayerOneDeck().addCardsOnTop(this.gameObject.getBuffer().getCards());
+                this.resetBattleField();
+            } else if (this.battlingCardLeft.getRank().getInt() < this.battlingCardRight.getRank().getInt()) {
+                this.getGameObject().getPlayerTwoDeck().addCardsOnTop(this.battlingCardLeft);
+                this.getGameObject().getPlayerTwoDeck().addCardsOnTop(this.battlingCardRight);
+                this.getGameObject().getPlayerTwoDeck().addCardsOnTop(this.gameObject.getBuffer().getCards());
+                this.resetBattleField();
+            } else {
+                // anjlsdkfalsdjf
+            }
         }
+    }
+
+    public void resetBattleField() {
+        this.setBattlingCardLeft(null);
+        this.setBattlingCardRight(null);
     }
 }
