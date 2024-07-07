@@ -42,6 +42,6 @@ public class CardsRepositoryImpl implements CardsRepository {
         }
 
         return Paths.get("src", "main", "resources", card.getSuit().toString().toLowerCase(),
-                String.format("%d.png", card.getRank().getRank()));
+                String.format("%d.png", card.getRank().getInt()));
     }
 }

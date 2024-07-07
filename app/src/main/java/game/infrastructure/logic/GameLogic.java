@@ -25,5 +25,4 @@ public interface GameLogic {
     public void setBattlingCardLeft(Card battlingCardLeft);
 
     public void setBattlingCardRight(Card battlingCardRight);
-
 }
