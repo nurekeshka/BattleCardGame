@@ -8,6 +8,5 @@ public class PlayerDeckLabel extends JLabel {
     public PlayerDeckLabel(ImageIcon icon) {
         super(icon);
         this.setHorizontalAlignment(SwingConstants.CENTER);
-
     }
 }
