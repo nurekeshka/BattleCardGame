@@ -83,7 +83,7 @@ public class GamePanel extends JPanel {
         this.setLayout(null);
         this.setPlayerDeckLabels();
         this.setTotalCardsLabels();
-        this.setWarBattleLabel();
+        this.setBattleLabel();
     }
 
     public void setPlayerDeckLabels() {
@@ -110,14 +110,19 @@ public class GamePanel extends JPanel {
         add(nextTurnButton);
     }
 
-    public void setWarBattleLabel() {
-        JLabel warLabel = new JLabel();
+    public void setBattleLabel() {
+        JLabel battleCardLabel = new JLabel();
         ImageIcon cover = this.getCardImage(new Card(null, null), 150, 200);
 
-        warLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        warLabel.setBounds(362, 130, 75, 100);
-        warLabel.setIcon(cover);
-        add(warLabel);
+        battleCardLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        battleCardLabel.setBounds(362, 130, 75, 100);
+        battleCardLabel.setIcon(cover);
+
+        JLabel battleCountLabel = new JLabel(String.format("%d", this.gameLogic.getWarBufferCardsCount()));
+        battleCountLabel.setBounds(395, 235, 20, 20);
+
+        this.add(battleCardLabel);
+        this.add(battleCountLabel);
     }
 
     public void setTotalCardsLabels() {
