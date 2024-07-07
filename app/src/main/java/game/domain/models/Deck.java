@@ -1,12 +1,13 @@
 package game.domain.models;
 
+import java.io.Serializable;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Deck {
+public class Deck implements Serializable {
     private Queue<Card> cards;
 
     public Deck() {
@@ -32,6 +33,12 @@ public class Deck {
         }
     }
 
+    public void addCardsOnTop(Deck deck) {
+        for (Card card : deck.getCards()) {
+            this.cards.add(card);
+        }
+    }
+
     public Card takeCardsFromBottom() {
         return this.cards.poll();
     }
@@ -51,4 +58,23 @@ public class Deck {
         Collections.shuffle(buffer);
         this.cards = new LinkedList<>(buffer);
     }
+
+    public String toString() {
+        StringBuilder bld = new StringBuilder();
+
+        for (Card card : getCards()) {
+            bld.append(card.toString());
+        }
+
+        return bld.toString();
+    }
+
+    public int size() {
+        return this.cards.size();
+    }
+
+    public void clear() {
+        this.cards.clear();
+    }
+
 }

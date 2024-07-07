@@ -1,15 +1,15 @@
 package game.domain.models;
 
 import game.domain.enums.CardSuit;
-import game.domain.enums.CardValue;
+import game.domain.enums.CardRank;
 
-import java.nio.file.Path;
+import java.io.Serializable;
 
-public class Card {
+public class Card implements Serializable {
     private final CardSuit suit;
-    private final CardValue value;
+    private final CardRank value;
 
-    public Card(CardSuit suit, CardValue value) {
+    public Card(CardSuit suit, CardRank value) {
         this.suit = suit;
         this.value = value;
     }
@@ -18,7 +18,11 @@ public class Card {
         return suit;
     }
 
-    public CardValue getValue() {
+    public CardRank getValue() {
         return value;
+    }
+
+    public String toString() {
+        return String.format("%s of %s", this.getValue().toString(), this.getSuit().toString());
     }
 }

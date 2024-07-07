@@ -1,10 +1,16 @@
 package game.presentation.frames;
 
+import game.application.controls.Guice;
+import game.application.controls.Injector;
+import game.application.initialization.BasicModule;
 import game.domain.enums.CardSuit;
-import game.domain.enums.CardValue;
+import game.domain.enums.PlayerNames;
+import game.domain.enums.CardRank;
 import game.domain.models.Card;
-import game.domain.models.Deck;
-import game.infrastructure.logic.impl.GameLogicImpl;
+import game.domain.models.Game;
+import game.domain.models.Player;
+import game.domain.repositories.CardsRepository;
+import game.infrastructure.logic.GameLogic;
 
 import java.awt.EventQueue;
 
@@ -14,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
+import java.nio.file.Path;
 import java.awt.Image;
 
 import javax.swing.JLabel;
@@ -30,13 +37,14 @@ public class GameFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
+	private final GameLogic gameLogic;
+	private final CardsRepository cardsRepository;
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			try {
-				GameFrame frame = new GameFrame();
+				Injector injector = Guice.createInjector(new BasicModule());
+				GameFrame frame = injector.getInstance(GameFrame.class);
 				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -47,7 +55,12 @@ public class GameFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GameFrame() {
+	public GameFrame(GameLogic gameLogic, CardsRepository cardsRepository) {
+		this.gameLogic = gameLogic;
+		this.cardsRepository = cardsRepository;
+	}
+
+	public void init() {
 		setTitle("Title Upcoming");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 480);
@@ -59,7 +72,7 @@ public class GameFrame extends JFrame {
 		JButton btnNextTurn = new JButton("Next Turn");
 		btnNextTurn.setBounds(325, 325, 150, 50);
 		btnNextTurn.addActionListener((ActionEvent e) -> {
-
+			gameLogic.next();
 		});
 		contentPane.setLayout(null);
 
@@ -81,21 +94,27 @@ public class GameFrame extends JFrame {
 		contentPane.add(btnNextTurn);
 
 		// IMPORTING IMAGES HERE
-		ImageIcon imgJ = new ImageIcon("PLACEHOLDER_CARD_IMAGE.png"); // Full Size - Deck
-		Image imgTemp = imgJ.getImage().getScaledInstance(imgJ.getIconWidth() / 2, imgJ.getIconHeight() / 2,
-				java.awt.Image.SCALE_SMOOTH);
-		ImageIcon imgJS = new ImageIcon(imgTemp); // Half Size - War
+		Card card = new Card(CardSuit.HEARTS, CardRank.ACE);
+		Path path = cardsRepository.getImagePath(card);
+
+		ImageIcon img1 = new ImageIcon(path.toString()); // Full Size - Deck
+		Image imgTemp;
+		imgTemp = img1.getImage().getScaledInstance(150, 200, Image.SCALE_SMOOTH);
+		img1 = new ImageIcon(imgTemp);
+		imgTemp = img1.getImage().getScaledInstance(img1.getIconWidth() / 2, img1.getIconHeight() / 2,
+				Image.SCALE_SMOOTH);
+		ImageIcon img1Small = new ImageIcon(imgTemp); // Half Size - War
 
 		JLabel playerOneDeckLabel = new JLabel("");
 		playerOneDeckLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		playerOneDeckLabel.setBounds(150, 80, 150, 200);
-		playerOneDeckLabel.setIcon(imgJ);
+		playerOneDeckLabel.setIcon(img1);
 		contentPane.add(playerOneDeckLabel);
 
 		JLabel playerTwoDeckLabel = new JLabel("");
 		playerTwoDeckLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		playerTwoDeckLabel.setBounds(500, 80, 150, 200);
-		playerTwoDeckLabel.setIcon(imgJ);
+		playerTwoDeckLabel.setIcon(img1);
 		contentPane.add(playerTwoDeckLabel);
 
 		JLabel playerOneTotalLabel = new JLabel("Total Cards Count");
@@ -120,17 +139,11 @@ public class GameFrame extends JFrame {
 		playerTwoCardsLabel.setBounds(680, 200, 100, 20);
 		contentPane.add(playerTwoCardsLabel);
 
-		JLabel playerOneWarLabel = new JLabel("");
-		playerOneWarLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		playerOneWarLabel.setBounds(310, 130, 75, 100);
-		playerOneWarLabel.setIcon(imgJS);
-		contentPane.add(playerOneWarLabel);
-
-		JLabel playerTwoWarLabel = new JLabel("");
-		playerTwoWarLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		playerTwoWarLabel.setBounds(415, 130, 75, 100);
-		playerTwoWarLabel.setIcon(imgJS);
-		contentPane.add(playerTwoWarLabel);
+		JLabel warLabel = new JLabel("");
+		warLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		warLabel.setBounds(362, 130, 75, 100);
+		warLabel.setIcon(img1Small);
+		contentPane.add(warLabel);
 
 		JLabel lblLogs = new JLabel(
 				"Logs: This shows the most recent action taken for better clarity and debug purposes");
@@ -138,5 +151,15 @@ public class GameFrame extends JFrame {
 		lblLogs.setFont(loggerFont);
 		lblLogs.setBounds(475, 35, 300, 20);
 		contentPane.add(lblLogs);
+		setVisible(true);
+	}
+
+	private void startGame() {
+		Player[] players = new Player[] {
+				new Player(PlayerNames.PLAYER_ONE.toString(), null),
+				new Player(PlayerNames.PLAYER_TWO.toString(), null)
+		};
+		this.gameLogic.setGameObject((new Game(players)));
+		this.gameLogic.start();
 	}
 }

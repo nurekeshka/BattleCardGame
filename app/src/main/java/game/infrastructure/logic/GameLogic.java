@@ -1,8 +1,19 @@
 package game.infrastructure.logic;
 
+import game.domain.models.Game;
+
 public interface GameLogic {
-    // This method should initialize the game process
     public void start();
 
-    public void next(); //upon pressing next turn button
+    public void next();
+
+    public void close();
+
+    public Game getGameObject();
+
+    public void setGameObject(Game gameObject);
+
+    public int getPlayerOneDeckCardsCount();
+
+    public int getPlayerTwoDeckCardsCount();
 }
