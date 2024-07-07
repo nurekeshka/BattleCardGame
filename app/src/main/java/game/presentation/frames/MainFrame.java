@@ -10,8 +10,12 @@ import game.presentation.components.panels.GamePanel;
 import game.presentation.components.panels.MenuPanel;
 
 public class MainFrame extends JFrame {
+    private static int windowWidth = 600;
+    private static int windowHeight = 400;
+
     public void init() {
         this.setWindowConfiguration();
+        this.switchToWindow(GameWindows.MENU);
     }
 
     public void switchToWindow(GameWindows window) {
@@ -28,8 +32,11 @@ public class MainFrame extends JFrame {
 
     public void setWindowConfiguration() {
         setTitle("Battle Card Game");
-        setSize(600, 400);
-        setMinimumSize(new Dimension(600, 400));
+
+        setSize(MainFrame.windowWidth, MainFrame.windowHeight);
+        setMinimumSize(new Dimension(MainFrame.windowWidth, MainFrame.windowHeight));
+        setMaximumSize(new Dimension(MainFrame.windowWidth, MainFrame.windowHeight));
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
