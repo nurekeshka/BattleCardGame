@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import game.domain.enums.CardSuit;
 import game.domain.enums.CardRank;
 import game.domain.models.Card;
+import game.domain.models.Game;
 import game.domain.repositories.CardsRepository;
 import game.infrastructure.logic.GameLogic;
 import game.infrastructure.progress.GameProgress;
@@ -26,6 +27,7 @@ import javax.swing.JMenuItem;
 
 import game.presentation.components.labels.PlayerDeckLabel;
 import game.presentation.components.labels.TotalCardsLabel;
+import game.presentation.components.labels.TotalCardsViewLabel;
 import game.presentation.frames.MainFrame;
 
 public class GamePanel extends JPanel {
@@ -81,6 +83,8 @@ public class GamePanel extends JPanel {
     public void updateFromGameState() {
         this.clearFrame();
 
+        Game gameObject = this.gameLogic.getGameObject();
+
         JButton btnNextTurn = new JButton("Next Turn");
         btnNextTurn.setBounds(325, 325, 150, 50);
         btnNextTurn.addActionListener((ActionEvent e) -> gameLogic.next());
@@ -114,13 +118,11 @@ public class GamePanel extends JPanel {
         playerTwoTotalLabel.setBounds(680, 180, 100, 20);
         add(playerTwoTotalLabel);
 
-        JLabel playerOneCardsLabel = new JLabel("N");
-        playerOneCardsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel playerOneCardsLabel = new TotalCardsViewLabel(this.gameLogic.getPlayerOneDeckCardsCount());
         playerOneCardsLabel.setBounds(20, 200, 100, 20);
         add(playerOneCardsLabel);
 
-        JLabel playerTwoCardsLabel = new JLabel("N");
-        playerTwoCardsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel playerTwoCardsLabel = new TotalCardsViewLabel(this.gameLogic.getPlayerTwoDeckCardsCount());
         playerTwoCardsLabel.setBounds(680, 200, 100, 20);
         add(playerTwoCardsLabel);
 
@@ -138,10 +140,6 @@ public class GamePanel extends JPanel {
         add(lblLogs);
     }
 
-    public ImageIcon getImage(Card card) {
-        return new ImageIcon(this.cardsRepository.getImagePath(card).toString());
-    }
-
     public void setMenuConfiguration() {
         String[] authorsList = new String[] { "Amirali", "Eslam", "Ulukbek", "Michael", "Miras", "Nurbek", "Omar" };
 
@@ -155,6 +153,10 @@ public class GamePanel extends JPanel {
         menu.setBounds(0, 0, 786, 25);
         menu.add(authors);
         this.add(menu);
+    }
+
+    public ImageIcon getImage(Card card) {
+        return new ImageIcon(this.cardsRepository.getImagePath(card).toString());
     }
 
     public void clearFrame() {
