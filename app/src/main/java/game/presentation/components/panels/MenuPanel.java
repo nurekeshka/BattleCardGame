@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 public class MenuPanel extends JPanel {
     String[] buttons = new String[] { "Play", "Exit" };
 
-    public MenuPanel(MainFrame main) {
+    public MenuPanel init(MainFrame main) {
         JPanel menuPanel = new JPanel();
 
         JButton playButton = new JButton(buttons[0]);
@@ -26,5 +26,6 @@ public class MenuPanel extends JPanel {
         exitButton.addActionListener((ActionEvent e) -> System.exit(0));
 
         this.add(menuPanel);
+        return this;
     }
 }

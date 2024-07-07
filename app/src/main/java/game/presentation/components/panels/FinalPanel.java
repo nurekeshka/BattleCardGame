@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import game.presentation.frames.MainFrame;
 
 public class FinalPanel extends JPanel {
-    public FinalPanel(MainFrame main) {
-
+    public FinalPanel init(MainFrame main) {
+        return this;
     }
 }
