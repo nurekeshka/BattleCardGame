@@ -49,7 +49,7 @@ public class GamePanel extends JPanel {
         if (this.gameProgress.exists()) {
             this.newGameOrLoad();
         } else {
-            this.foo();
+            this.startNewGame();
         }
 
         return this;
@@ -70,13 +70,17 @@ public class GamePanel extends JPanel {
 
     public void startNewGame() {
         this.gameLogic.newGame();
+        this.updateFromGameState();
     }
 
     public void continueGame() {
         this.gameLogic.loadGame();
+        this.updateFromGameState();
     }
 
-    public void foo() {
+    public void updateFromGameState() {
+        this.clearFrame();
+
         JButton btnNextTurn = new JButton("Next Turn");
         btnNextTurn.setBounds(325, 325, 150, 50);
         btnNextTurn.addActionListener((ActionEvent e) -> gameLogic.next());
@@ -132,7 +136,6 @@ public class GamePanel extends JPanel {
         lblLogs.setFont(loggerFont);
         lblLogs.setBounds(475, 35, 300, 20);
         add(lblLogs);
-        setVisible(true);
     }
 
     public ImageIcon getImage(Card card) {
@@ -152,6 +155,16 @@ public class GamePanel extends JPanel {
         menu.setBounds(0, 0, 786, 25);
         menu.add(authors);
         this.add(menu);
+    }
+
+    public void clearFrame() {
+        this.removeAll();
+        this.updatePanel();
+    }
+
+    public void updatePanel() {
+        this.revalidate();
+        this.repaint();
     }
 
     public void setPanelConfiguration(MainFrame main) {
