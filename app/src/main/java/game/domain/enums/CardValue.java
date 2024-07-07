@@ -24,14 +24,4 @@ public enum CardValue {
     public int getNumValue() {
         return this.numValue;
     }
-
-    //returns TWO if given 2, JACK if given 11, etc
-    public static String getName(int num) {
-        for (CardValue e : values()) {
-            if (e.numValue == num) {
-                return e.name();
-            }
-        }
-        return "";
-    }
 }
