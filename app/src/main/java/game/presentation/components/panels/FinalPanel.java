@@ -2,6 +2,10 @@ package game.presentation.components.panels;
 
 import javax.swing.JPanel;
 
-public class FinalPanel extends JPanel {
+import game.presentation.frames.MainFrame;
 
+public class FinalPanel extends JPanel {
+    public FinalPanel(MainFrame main) {
+
+    }
 }

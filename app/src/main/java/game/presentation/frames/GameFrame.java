@@ -1,8 +1,5 @@
 package game.presentation.frames;
 
-import game.application.controls.Guice;
-import game.application.controls.Injector;
-import game.application.initialization.BasicModule;
 import game.domain.enums.CardSuit;
 import game.domain.enums.PlayerNames;
 import game.domain.enums.CardRank;
@@ -11,8 +8,6 @@ import game.domain.models.Game;
 import game.domain.models.Player;
 import game.domain.repositories.CardsRepository;
 import game.infrastructure.logic.GameLogic;
-
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
