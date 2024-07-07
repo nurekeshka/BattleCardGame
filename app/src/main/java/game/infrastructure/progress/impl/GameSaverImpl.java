@@ -4,6 +4,8 @@ import game.domain.models.Deck;
 import game.infrastructure.progress.GameSaver;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class GameSaverImpl implements GameSaver {
     // Method to save the game state to a file
@@ -26,5 +28,9 @@ public class GameSaverImpl implements GameSaver {
             // Read the game object from the file and return it
             return (Deck[]) in.readObject();
         }
+    }
+
+    public String dateAndTimeAsString() {
+        return new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date());
     }
 }
