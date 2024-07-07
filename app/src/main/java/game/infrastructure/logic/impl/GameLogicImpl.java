@@ -1,17 +1,14 @@
 package game.infrastructure.logic.impl;
 
 import game.domain.models.Game;
-import game.domain.repositories.CardsRepository;
 import game.infrastructure.logic.GameLogic;
 import game.infrastructure.progress.GameProgress;
 
 public class GameLogicImpl implements GameLogic {
     private Game gameObject;
     private final GameProgress gameProgress;
-    private final CardsRepository cardsRepository;
 
-    public GameLogicImpl(CardsRepository cardsRepository, GameProgress gameProgress) {
-        this.cardsRepository = cardsRepository;
+    public GameLogicImpl(GameProgress gameProgress) {
         this.gameProgress = gameProgress;
     }
 
@@ -67,7 +64,7 @@ public class GameLogicImpl implements GameLogic {
     }
 
     public void close() {
-    } // triggers when one player runs out of cards
+    }
 
     // message to be displayed in logs frame
     public void logMsg(String msg) {
