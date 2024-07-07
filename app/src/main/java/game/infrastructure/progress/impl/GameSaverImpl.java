@@ -8,7 +8,14 @@
 // import java.text.SimpleDateFormat;
 // import java.util.Date;
 
-// public class GameSaverImpl implements GameSaver {
+import java.io.IOException;
+
+import game.domain.models.Deck;
+import game.infrastructure.progress.GameSaver;
+
+public class GameSaverImpl implements GameSaver {
+
+}
 // // Method to save the game state to a file
 // public void saveGame(Deck[] gameDecks) throws IOException {
 // // Ensure the directory exists where the file will be saved
