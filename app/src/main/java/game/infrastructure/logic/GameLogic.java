@@ -18,6 +18,8 @@ public interface GameLogic {
 
     public int getPlayerTwoDeckCardsCount();
 
+    public int getWarBufferCardsCount();
+
     public Card getBattlingCardLeft();
 
     public Card getBattlingCardRight();

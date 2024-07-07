@@ -32,6 +32,10 @@ public class GameLogicImpl implements GameLogic {
         return this.gameObject.getPlayerTwoDeck().size();
     }
 
+    public int getWarBufferCardsCount() {
+        return this.gameObject.getBuffer().size();
+    }
+
     @Override
     public void newGame() {
         this.setGameObject(this.gameProgress.newGame());
@@ -76,15 +80,21 @@ public class GameLogicImpl implements GameLogic {
                 this.getGameObject().getPlayerOneDeck().addCardsOnTop(this.battlingCardLeft);
                 this.getGameObject().getPlayerOneDeck().addCardsOnTop(this.battlingCardRight);
                 this.getGameObject().getPlayerOneDeck().addCardsOnTop(this.gameObject.getBuffer().getCards());
-                this.resetBattleField();
             } else if (this.battlingCardLeft.getRank().getInt() < this.battlingCardRight.getRank().getInt()) {
                 this.getGameObject().getPlayerTwoDeck().addCardsOnTop(this.battlingCardLeft);
                 this.getGameObject().getPlayerTwoDeck().addCardsOnTop(this.battlingCardRight);
                 this.getGameObject().getPlayerTwoDeck().addCardsOnTop(this.gameObject.getBuffer().getCards());
-                this.resetBattleField();
             } else {
-                // anjlsdkfalsdjf
+                this.getGameObject().getBuffer().addCardsOnTop(this.getBattlingCardLeft());
+                this.getGameObject().getBuffer().addCardsOnTop(this.getBattlingCardRight());
+
+                this.getGameObject().getBuffer()
+                        .addCardsOnTop(this.getGameObject().getPlayerOneDeck().takeCardsFromBottom(3));
+                this.getGameObject().getBuffer()
+                        .addCardsOnTop(this.getGameObject().getPlayerTwoDeck().takeCardsFromBottom(3));
             }
+
+            this.resetBattleField();
         }
     }
 
