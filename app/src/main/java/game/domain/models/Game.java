@@ -13,6 +13,12 @@ public class Game {
         this.buffer = buffer;
     }
 
+    public Game(Player[] players) {
+        this.players = players;
+        this.state = GameState.RUNNING;
+        this.buffer = new Deck();
+    }
+
     public Deck getBuffer() {
         return buffer;
     }
