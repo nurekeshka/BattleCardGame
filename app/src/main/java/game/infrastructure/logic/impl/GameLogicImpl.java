@@ -16,22 +16,27 @@ public class GameLogicImpl implements GameLogic {
         this.gameProgress = gameProgress;
     }
 
+    @Override
     public Game getGameObject() {
         return gameObject;
     }
 
+    @Override
     public void setGameObject(Game gameObject) {
         this.gameObject = gameObject;
     }
 
+    @Override
     public int getPlayerOneDeckCardsCount() {
         return this.gameObject.getPlayerOneDeck().size();
     }
 
+    @Override
     public int getPlayerTwoDeckCardsCount() {
         return this.gameObject.getPlayerTwoDeck().size();
     }
 
+    @Override
     public int getWarBufferCardsCount() {
         return this.gameObject.getBuffer().size();
     }
@@ -46,6 +51,7 @@ public class GameLogicImpl implements GameLogic {
         this.setGameObject(this.gameProgress.loadGame());
     }
 
+    @Override
     public Card getBattlingCardLeft() {
         if (this.battlingCardLeft == null) {
             return new Card(null, null);
@@ -54,6 +60,7 @@ public class GameLogicImpl implements GameLogic {
         return battlingCardLeft;
     }
 
+    @Override
     public Card getBattlingCardRight() {
         if (this.battlingCardRight == null) {
             return new Card(null, null);
@@ -62,10 +69,12 @@ public class GameLogicImpl implements GameLogic {
         return battlingCardRight;
     }
 
+    @Override
     public void setBattlingCardLeft(Card battlingCardLeft) {
         this.battlingCardLeft = battlingCardLeft;
     }
 
+    @Override
     public void setBattlingCardRight(Card battlingCardRight) {
         this.battlingCardRight = battlingCardRight;
     }
@@ -98,6 +107,7 @@ public class GameLogicImpl implements GameLogic {
         }
     }
 
+    @Override
     public void resetBattleField() {
         this.setBattlingCardLeft(null);
         this.setBattlingCardRight(null);
