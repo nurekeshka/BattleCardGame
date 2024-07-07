@@ -1,6 +1,6 @@
 package game.domain.enums;
 
-public enum GameWindows {
+public enum GamePanels {
     MENU,
     GAME,
     FINAL
