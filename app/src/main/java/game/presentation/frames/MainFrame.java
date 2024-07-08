@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
     private final GamePanel gamePanel;
     private final FinalPanel finalPanel;
 
-    private PlayerNames winner;
+    private PlayerNames winner = PlayerNames.COMPUTER;
 
     public MainFrame(MenuPanel menuPanel, GamePanel gamePanel, FinalPanel finalPanel) {
         this.menuPanel = menuPanel;
