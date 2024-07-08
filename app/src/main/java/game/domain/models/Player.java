@@ -3,7 +3,7 @@ package game.domain.models;
 public class Player {
     private final String name;
     private final Deck deck;
-    private Card battleCard;
+    private Card battleCard; //the revealed card, which is compared to the other revealed card
 
     public Player(String name, Deck deck) {
         this.name = name;
