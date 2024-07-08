@@ -55,21 +55,22 @@ public class GameProgressImpl implements GameProgress {
     }
 
     public Game loadGame() {
-        try (InputStream is = new FileInputStream(GameProgressImpl.gameSavePath.toFile().toString()); //get the path to save file
+        try (InputStream is = new FileInputStream(GameProgressImpl.gameSavePath.toFile().toString()); // get the path to
+                                                                                                      // save file
                 JsonReader reader = Json.createReader(is)) {
             JsonObject object = reader.readObject();
-            Player[] players = this.getPlayers(object); //load player objects from json
-            Deck bufferDeck = this.getBufferDeck(object); //load buffer deck from json
+            Player[] players = this.getPlayers(object); // load player objects from json
+            Deck bufferDeck = this.getBufferDeck(object); // load buffer deck from json
 
-            return new Game(players, bufferDeck); //return the information as a Game object
+            return new Game(players, bufferDeck); // return the information as a Game object
         } catch (IOException e) {
-            System.exit(0); //this was needed to prevent compiler being angry
+            System.exit(0); // this was needed to prevent compiler being angry
         }
 
         return null;
     }
 
-    //converting multiple players to json
+    // converting multiple players to json
     public Player[] getPlayers(JsonObject object) {
         List<Player> players = new ArrayList<>();
 
@@ -81,10 +82,16 @@ public class GameProgressImpl implements GameProgress {
         return players.toArray(new Player[] {});
     }
 
-    //convert one player to json, used in previous function
+    // convert one player to json, used in previous function
     public Player getPlayer(JsonObject object) {
-        return new Player(object.getString("name"), this.getDeckFromJsonArray(object.getJsonArray("deck")),
-                this.getCardFromJsonObject(object.getJsonObject(battleCardName)));
+        Card battleCard = this.getCardFromJsonObject(object.getJsonObject(battleCardName));
+
+        if (battleCard == null) {
+            return new Player(object.getString("name"), this.getDeckFromJsonArray(object.getJsonArray("deck")));
+        } else {
+            return new Player(object.getString("name"), this.getDeckFromJsonArray(object.getJsonArray("deck")),
+                    battleCard);
+        }
     }
 
     public Deck getBufferDeck(JsonObject object) {
@@ -103,10 +110,14 @@ public class GameProgressImpl implements GameProgress {
     }
 
     public Card getCardFromJsonObject(JsonObject object) {
-        return this.cardsRepository.getCard(object.getString(suitName), object.getString(rankName));
+        try {
+            return this.cardsRepository.getCard(object.getString(suitName), object.getString(rankName));
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 
-    //writing all the game information to json file
+    // writing all the game information to json file
     public void saveGame(Game game) {
         JsonArrayBuilder players = this.savePlayers(game);
         JsonArrayBuilder buffer = this.saveBuffer(game);
@@ -123,7 +134,7 @@ public class GameProgressImpl implements GameProgress {
         }
     }
 
-    //used in saveGame()
+    // used in saveGame()
     public JsonArrayBuilder savePlayers(Game game) {
         JsonArrayBuilder playersBuilder = Json.createArrayBuilder();
         Player[] players = game.getPlayers();
@@ -135,7 +146,7 @@ public class GameProgressImpl implements GameProgress {
         return playersBuilder;
     }
 
-    //used in saveGame()
+    // used in saveGame()
     public JsonObjectBuilder savePlayer(Player player) {
         JsonObjectBuilder playerBuilder = Json.createObjectBuilder();
 
@@ -153,12 +164,12 @@ public class GameProgressImpl implements GameProgress {
         return playerBuilder;
     }
 
-    //used in saveGame()
+    // used in saveGame()
     public JsonArrayBuilder saveBuffer(Game game) {
         return this.saveDeck(game.getBuffer());
     }
 
-    //used in saveGame()
+    // used in saveGame()
     public JsonArrayBuilder saveDeck(Deck deck) {
         JsonArrayBuilder deckBuilder = Json.createArrayBuilder();
 
@@ -169,7 +180,7 @@ public class GameProgressImpl implements GameProgress {
         return deckBuilder;
     }
 
-    //used in saveGame()
+    // used in saveGame()
     public JsonObjectBuilder saveCard(Card card) {
         JsonObjectBuilder cardBuilder = Json.createObjectBuilder();
 
