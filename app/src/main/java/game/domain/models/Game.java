@@ -4,8 +4,8 @@ import game.domain.enums.GameState;
 
 public class Game {
     private final Player[] players;
-    private Deck buffer;
-    private GameState state;
+    private Deck buffer; // cards in war
+    private GameState state; //running or finished
 
     public Game(Player[] players, Deck buffer) {
         this.players = players;
