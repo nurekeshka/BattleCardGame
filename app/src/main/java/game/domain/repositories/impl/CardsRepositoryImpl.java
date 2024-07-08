@@ -36,7 +36,7 @@ public class CardsRepositoryImpl implements CardsRepository {
     }
 
     @Override
-    public Path getImagePath(Card card) {
+    public Path getImagePath(Card card) { //user for displaying the card in GamePanel
         if (card.getRank() == null || card.getSuit() == null) {
             return Paths.get("src", "main", "resources", "common", "cover.png");
         }
