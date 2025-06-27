@@ -46,7 +46,7 @@ public class GameProgressImpl implements GameProgress {
         Deck fullDeck = this.cardsRepository.getFullDeck();
         fullDeck.shuffle();
 
-        Player[] players = new Player[] {
+        Player[] players = new Player[]{
                 new Player(PlayerNames.PLAYER_ONE.toString(), new Deck(fullDeck.takeCardsFromBottom(26))),
                 new Player(PlayerNames.PLAYER_TWO.toString(), new Deck(fullDeck.takeCardsFromBottom(26))),
         };
@@ -56,8 +56,8 @@ public class GameProgressImpl implements GameProgress {
 
     public Game loadGame() {
         try (InputStream is = new FileInputStream(GameProgressImpl.gameSavePath.toFile().toString()); // get the path to
-                                                                                                      // save file
-                JsonReader reader = Json.createReader(is)) {
+             // save file
+             JsonReader reader = Json.createReader(is)) {
             JsonObject object = reader.readObject();
             Player[] players = this.getPlayers(object); // load player objects from json
             Deck bufferDeck = this.getBufferDeck(object); // load buffer deck from json
@@ -79,7 +79,7 @@ public class GameProgressImpl implements GameProgress {
             players.add(this.getPlayer(player));
         }
 
-        return players.toArray(new Player[] {});
+        return players.toArray(new Player[]{});
     }
 
     // convert one player to json, used in previous function
@@ -106,7 +106,7 @@ public class GameProgressImpl implements GameProgress {
             cards.add(this.getCardFromJsonObject(cardObject));
         }
 
-        return new Deck(cards.toArray(new Card[] {}));
+        return new Deck(cards.toArray(new Card[]{}));
     }
 
     public Card getCardFromJsonObject(JsonObject object) {
@@ -127,7 +127,7 @@ public class GameProgressImpl implements GameProgress {
                 .add("buffer", buffer);
 
         try (OutputStream os = new FileOutputStream(gameSavePath.toString());
-                JsonWriter jsonWriter = Json.createWriter(os)) {
+             JsonWriter jsonWriter = Json.createWriter(os)) {
             jsonWriter.writeObject(gameObject.build());
         } catch (Exception e) {
             e.printStackTrace();
